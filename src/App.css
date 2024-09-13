@@ -1,0 +1,163 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 8px;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+input {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 8px;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+body {
+  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
+  margin: 5%;
+}
+h1 {
+  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
+  font-size: 36px;
+  color: rgb(67, 10, 114)
+}
+h2 {
+  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
+  font-size: 24px;
+  margin: 0 0 3px;
+  color: rgb(70, 15, 114)
+}
+h3 {
+  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
+  margin: -7px 0 7px;
+  display: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 15px 0;
+}
+b {
+  color: black;
+}
+p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #999;
+}
+ul {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 24px;
+  list-style-type: circle;
+  padding-left: 30px;
+  color: #999;
+}
+
+button {
+  background-color:rgb(77, 11, 132);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.info_collector {
+    /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+    height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
+    max-width: 80vw;
+    min-width: 60vw;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(229, 222, 234, 0.2);
+    border-radius: 8px;
+}
+
+.result {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 600px;
+  min-width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.birth-time-row {
+  /*display: flex;*/
+  /* flex-wrap: nowrap;  /* Prevents wrapping to the next line */
+  align-items: center;
+  /* white-space: nowrap; /* Keeps text on one line */
+}
+
+.birth-location-row {
+  /*display: flex;*/
+  /* flex-wrap: nowrap;  /* Prevents wrapping to the next line */
+  align-items: center;
+  /* white-space: nowrap; /* Keeps text on one line */
+}
+
+.birth-time-row select {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.birth-location-row select {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.error {
+  color:rgb(220, 26, 26)
+}
+
+.input_url {
+    width: 100%;
+    max-width: 80%; /* Ensures the box doesn't extend beyond the container */
+    min-width: 30ch; /* Minimum width of 30 characters */
+}
+.calculation_result {
+    width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+    height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #99999900;
+    border-radius: 8px;
+}
