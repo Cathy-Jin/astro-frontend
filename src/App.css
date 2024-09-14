@@ -161,3 +161,16 @@ button {
     background-color: #99999900;
     border-radius: 8px;
 }
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+  font-size: 12px;
+}
+
+.footer a {
+  color: rgba(78, 11, 132, 0.536);
+  text-decoration: none;
+}

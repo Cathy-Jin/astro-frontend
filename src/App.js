@@ -10,8 +10,8 @@ function App() {
     minute: '',
     city: '',
     state: '',
-    country: '中国',
-    isDst: false
+    country: '中国'
+    // excluding DST at the moment isDst: false 
   });
 
   const [result, setResult] = useState(null);
@@ -21,9 +21,9 @@ function App() {
   };
 
   // Handler for checkbox change (DST)
-  const handleDSTChange = (e) => {
-    setFormData({ ...formData, isDst: e.target.checked });
-  };
+  // const handleDSTChange = (e) => {
+  //   setFormData({ ...formData, isDst: e.target.checked });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ function App() {
 
 
   // Generate lists for each dropdown
-  const years = Array.from({ length: 2024 - 1920 + 1 }, (_, i) => 1920 + i);
+  const years = Array.from({ length: 2024 - 1920 + 1 }, (_, i) => 2024 - i);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const hours = Array.from({ length: 24 }, (_, i) => i);
@@ -106,8 +106,8 @@ function App() {
                 ))}
               </select>
               分
-              <br />  
-              <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时
+              {/* <br />  
+              <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时 */}
             </div>
             <br />
             <div className="birth-location-row">
@@ -125,6 +125,9 @@ function App() {
       </div>
       
       {result && (<div className="result">{renderResult(result)}</div>)}
+      <footer className="footer">
+        <hr /><a href="mailto:cathyking716@gmail.com">Contact Me</a>
+      </footer>
     </div>
   );
   
