@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const [formData, setFormData] = useState({
     year: '',
     month: '',
@@ -15,6 +17,10 @@ function App() {
   });
 
   const [result, setResult] = useState(null);
+
+  const toggleExpand = () => {
+    setIsExpanded(prevState => !prevState);
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,7 +59,25 @@ function App() {
   return (
     <div className="App">
       <h1>人生主题计算器</h1>
-      <div class="info_collector">
+      <div className="background">
+        <h4 onClick={toggleExpand} style={{ cursor: 'pointer' }}>什么是人生主题？</h4>
+        {isExpanded && (
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相信许多占星爱好者都知道，星盘由三个基本元素组成：星座、宫位和行星。这三者的独特排列形成了占星学中的一种整体性，而每个元素都可以看作是占星符号的十二个规则的表现形式。这十二个规则之间的互动可以通过行星的位置、它们所在的宫位以及行星之间的相位（即相互关系）来体现。
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;举个例子，下述皆说明了7与10的交替作用：土星落在天秤座；土星落在七宫；金星落在魔羯座；金星落在十宫；金星与土星的所有相位；七宫所在行星与十宫所在行星的所有相位；以及天秤座所在行星与魔羯座所在行星的所有相位。
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;史蒂芬·阿若优（Stephen Arroyo）在他的《生命的轨迹》中说道：“一个人的本命盘若是有某种类型的交替法则以三种或多种情况呈现出来，那么这股动力就会构成所谓的生命重要主题。”
+            <br />
+            <b>如何使用这个网站？</b>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果你是一名现代占星爱好者，这个网站可以快速总结出占星规则之间的互动及其出现频率（由高到低），帮助你更轻松地解读星盘。
+            如果你对自我认知感兴趣，这个网站可以提供一个新的视角，结合其他工具，帮助你更深入地理解自身的能量和潜能。
+          </p>
+        )}
+      </div>
+      <br />
+      <div className="info_collector">
         <form onSubmit={handleSubmit}>
           <p>
             <h3><b>输入你的基本信息</b></h3>
@@ -115,9 +139,9 @@ function App() {
               <br />国家/地区：
               <input type="text" name="country" size="10" placeholder="中国" value={formData.country} onChange={handleChange} />
               <br />省份：
-              <input type="text" name="state" size="10" placeholder="河南省" value={formData.state} onChange={handleChange} />
+              <input type="text" name="state" size="10" placeholder="江苏省" value={formData.state} onChange={handleChange} />
               <br />城市：
-              <input type="text" name="city" size="10" placeholder="洛阳市" value={formData.city} onChange={handleChange} />
+              <input type="text" name="city" size="10" placeholder="苏州市" value={formData.city} onChange={handleChange} />
             </div>
           </p>
           <button type="submit">生成结果</button>

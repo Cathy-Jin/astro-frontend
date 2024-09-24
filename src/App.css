@@ -97,6 +97,23 @@ button {
   margin-top: 10px;
 }
 
+.background {
+  text-align: left;
+  padding: 5px;
+  max-width: 600px;
+  min-width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.background h4 {
+  text-align: center;
+  color: rgba(78, 11, 132, 0.536);
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+}
+
 .info_collector {
     /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
     height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
