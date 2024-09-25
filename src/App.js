@@ -158,7 +158,6 @@ function App() {
 }
 
 function renderResult(result) {
-  // TODO: handle errors first
   if (typeof result === 'object' && result !== null && result.hasOwnProperty('error')) {
     if (result.error.includes("Invalid input: ")) {
       return (
@@ -175,13 +174,13 @@ function renderResult(result) {
     } else if (result.error.includes("Unable to find the timezone")) {
       return (
         <>
-          <div className="error">无法找到出生地时区，请重试。</div>
+          <div className="error">无法找到出生地时区，请刷新或重试。</div>
         </>
       )
     } else {
       return (
         <>
-          <div className="error">似乎没有找到结果，请重试。</div>
+          <div className="error">似乎没有找到结果，请刷新或重试。</div>
         </>
       )
     }
@@ -190,7 +189,7 @@ function renderResult(result) {
       return (
         <> 
           <h2>计算结果</h2> 
-          <p>似乎没有找到结果，请重试。</p>
+          <p>似乎没有找到结果，请刷新或重试。</p>
         </>
       )
     } else {
@@ -204,7 +203,7 @@ function renderResult(result) {
   } else {
     return (
       <>
-        <div className="error">似乎没有找到结果，请重试。</div>
+        <div className="error">似乎没有找到结果，请刷新或重试。</div>
       </>
     )
   }
@@ -224,6 +223,7 @@ function renderEnergy(e) {
       <>
           <h3>主题：{e.name_cn}</h3>
           <p><b>关键词（仅供参考）</b>：{renderKeywords(e.principle_kws_cn, e.principle_nums)}</p>
+          <p><b>解读（仅供参考）</b>：{e.interpretation_cn}</p>
           <p><b>星盘中出现次数</b>：{e.patterns_cn.length}</p>
           <p><b>星盘中表现形式</b>：
               <ul>
