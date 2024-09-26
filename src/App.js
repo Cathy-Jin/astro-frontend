@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);  // Add loading state
 
   const [formData, setFormData] = useState({
     year: '',
@@ -33,6 +34,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Start loading
     try {
       const response = await fetch('https://astro-notebook.onrender.com/theme', {
         method: 'POST',
@@ -45,6 +47,8 @@ function App() {
       setResult(data);
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoading(false);  // Stop loading when request completes
     }
   };
 
@@ -169,7 +173,7 @@ function App() {
           <button type="submit">生成结果</button>
           </form>
       </div>
-      
+      {loading && (<div><p>正在努力计算，请稍后。。。</p></div>)}
       {result && (<div className="result">{renderResult(result)}</div>)}
       <footer className="footer">
         <hr /><a href="mailto:cathyking716@gmail.com">Contact Me</a>
@@ -276,7 +280,6 @@ function renderKeywords(kws, p_nums) {
     )
   }
 }
-
 
 
 export default App;
