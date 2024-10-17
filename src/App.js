@@ -36,7 +36,7 @@ function App() {
     e.preventDefault();
     setLoading(true);  // Start loading
     try {
-      const response = await fetch('https://astro-notebook.onrender.com/theme', {
+      const response = await fetch('https://astro-notebook.onrender.com/report', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -210,7 +210,8 @@ function renderResult(result) {
         </>
       )
     }
-  } else if (Array.isArray(result)) {
+  } else if (typeof result === 'object' && result !== null && result.hasOwnProperty('themes')) {
+    result = result.themes
     if (result.length === 0) {
       return (
         <> 
