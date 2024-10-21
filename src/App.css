@@ -55,7 +55,7 @@ h2 {
 }
 h3 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
-  margin: -7px 0 7px;
+  margin: -7px 0 2px 0;
   display: inherit;
   font-size: 20px;
   font-weight: 700;
@@ -70,7 +70,7 @@ b {
   color: black;
 }
 p {
-  margin: 0 0 8px;
+  margin: 0 0 8px 0;
   font-size: 14px;
   line-height: 24px;
   color: #999;
@@ -97,6 +97,44 @@ button {
   margin-top: 10px;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+
+th, td {
+  border: 1px solid #ddd; /* Border for each cell */
+  padding: 8px;
+  text-align: center;
+  min-width: 45px;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  unicode-bidi: isolate;
+  border-color: inherit;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+  font-size: 12px;
+}
+
+footer a {
+  color: rgba(78, 11, 132, 0.536);
+  text-decoration: none;
+}
+
+.collapse-btn {
+  background-color:rgba(29, 85, 34, 0.7);
+  font-size: 16px;
+}
+
 .background {
   text-align: left;
   padding: 5px;
@@ -117,36 +155,26 @@ button {
 .info_collector {
     /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
     height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
-    max-width: 80vw;
+    max-width: min(80vw, 1200px);
     min-width: 60vw;
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
     background-color: rgba(229, 222, 234, 0.2);
     border-radius: 8px;
+    text-align: center;
 }
 
-.result {
-  margin-top: 20px;
-  text-align: left;
-  max-width: 600px;
-  min-width: 20vw;
-  margin-left: auto;
-  margin-right: auto;
+.info_collector_header {
+  align-items: center;
 }
 
 .birth-time-row {
-  /*display: flex;*/
-  /* flex-wrap: nowrap;  /* Prevents wrapping to the next line */
   align-items: center;
-  /* white-space: nowrap; /* Keeps text on one line */
 }
 
 .birth-location-row {
-  /*display: flex;*/
-  /* flex-wrap: nowrap;  /* Prevents wrapping to the next line */
   align-items: center;
-  /* white-space: nowrap; /* Keeps text on one line */
 }
 
 .birth-time-row select {
@@ -159,15 +187,70 @@ button {
   margin-right: 5px;
 }
 
-.error {
-  color:rgb(220, 26, 26)
+.result {
+  margin-top: 20px;
+  text-align: left;
+  max-width: min(80vw, 1200px);
+  min-width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.input_url {
-    width: 100%;
-    max-width: 80%; /* Ensures the box doesn't extend beyond the container */
-    min-width: 30ch; /* Minimum width of 30 characters */
+.report_item {
+  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+  height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(222, 234, 223, 0.2);
+  border-radius: 8px;
+  overflow: hidden; /* Ensures hidden content does not affect layout */
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for collapse */
 }
+
+.report_item h2 {
+  display: flex;
+  justify-content: space-between; /* Positions text on left and button on right */
+  align-items: center; /* Vertically centers the text and button */
+  margin: 0; /* Remove default margin from h2 */
+  padding: 0; /* Adjust if needed */
+}
+
+.report_item_summary {
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto;
+  padding: 10px 10px 5px 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: rgba(222, 234, 223, 0.7);
+}
+
+.report_item_summary p {
+  color:#818181;
+}
+
+.content {
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.content.hidden {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.planet_focialier_result_table th {
+  background-color: rgba(222, 234, 223, 0.7);
+  color: #818181;
+}
+
+.focalizer_pattern_row {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  text-align: left;
+}
+
 .calculation_result {
     width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
     height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
@@ -179,15 +262,6 @@ button {
     border-radius: 8px;
 }
 
-footer {
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: auto;
-  font-size: 12px;
-}
-
-.footer a {
-  color: rgba(78, 11, 132, 0.536);
-  text-decoration: none;
+.error {
+  color:rgb(220, 26, 26)
 }
