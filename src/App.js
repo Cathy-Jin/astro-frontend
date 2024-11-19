@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const currentYear = new Date().getFullYear();  // Get the current year dynamically
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(false);  // Add loading state
   const [isDominantPlanetResultCollapsed, setIsDominantPlanetResultCollapsed] = useState(false);
@@ -191,7 +192,8 @@ function App() {
       {loading && (<div><p>正在努力计算，请稍后。。。</p></div>)}
       {result && (<div className="result">{renderResult(result, isDominantPlanetResultCollapsed, toggleDominantPlanetResultCollapse, isLifeThemeResultCollapsed, toggleLifeThemeResultCollapse)}</div>)}
       <footer className="footer">
-        <hr /><a href="mailto:cathyking716@gmail.com">Contact Me</a>
+        <hr />
+        <p>&copy; {currentYear} The Author. All rights reserved. | <a href="mailto:cathyking716@gmail.com">Contact Me</a></p>
       </footer>
     </div>
   );
