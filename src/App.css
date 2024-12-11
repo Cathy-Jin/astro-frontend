@@ -6,6 +6,7 @@
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
@@ -15,7 +16,8 @@ select {
   margin-top: 5px;
   margin-right: 8px;
   margin-left: 8px;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
+  /* Prevents text from wrapping */
 }
 
 input {
@@ -23,7 +25,8 @@ input {
   margin-top: 5px;
   margin-right: 8px;
   margin-left: 8px;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
+  /* Prevents text from wrapping */
 }
 
 label {
@@ -42,17 +45,20 @@ body {
   align-items: flex-start;
   margin: 5%;
 }
+
 h1 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 36px;
   color: rgb(67, 10, 114)
 }
+
 h2 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 24px;
   margin: 0 0 3px;
   color: rgb(70, 15, 114)
 }
+
 h3 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   margin: -7px 0 2px 0;
@@ -61,20 +67,24 @@ h3 {
   font-weight: 700;
   line-height: 1.5;
 }
+
 hr {
   border: 0;
   border-top: 1px solid #eee;
   margin: 15px 0;
 }
+
 b {
   color: black;
 }
+
 p {
   margin: 0 0 8px 0;
   font-size: 14px;
   line-height: 24px;
   color: #999;
 }
+
 ul {
   margin: 0 0 8px;
   font-size: 14px;
@@ -85,7 +95,7 @@ ul {
 }
 
 button {
-  background-color:rgb(77, 11, 132);
+  background-color: rgb(77, 11, 132);
   border: none;
   color: white;
   padding: 5px 10px;
@@ -103,8 +113,10 @@ table {
   margin: 10px 0;
 }
 
-th, td {
-  border: 1px solid #ddd; /* Border for each cell */
+th,
+td {
+  border: 1px solid #ddd;
+  /* Border for each cell */
   padding: 8px;
   text-align: center;
   min-width: 45px;
@@ -131,7 +143,7 @@ footer a {
 }
 
 .collapse-btn {
-  background-color:rgba(29, 85, 34, 0.7);
+  background-color: rgba(29, 85, 34, 0.7);
   font-size: 16px;
 }
 
@@ -153,16 +165,17 @@ footer a {
 }
 
 .info_collector {
-    /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
-    height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
-    max-width: min(80vw, 1200px);
-    min-width: 60vw;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(229, 222, 234, 0.2);
-    border-radius: 8px;
-    text-align: center;
+  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+  height: calc(100% - 10px);
+  /* Subtracting 40px from the viewport height */
+  max-width: min(80vw, 1200px);
+  min-width: 60vw;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(229, 222, 234, 0.2);
+  border-radius: 8px;
+  text-align: center;
 }
 
 .info_collector_header {
@@ -198,22 +211,29 @@ footer a {
 
 .report_item {
   /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
-  height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
+  height: calc(100% - 10px);
+  /* Subtracting 40px from the viewport height */
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
   background-color: rgba(222, 234, 223, 0.2);
   border-radius: 8px;
-  overflow: hidden; /* Ensures hidden content does not affect layout */
-  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for collapse */
+  overflow: hidden;
+  /* Ensures hidden content does not affect layout */
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  /* Smooth transition for collapse */
 }
 
 .report_item h2 {
   display: flex;
-  justify-content: space-between; /* Positions text on left and button on right */
-  align-items: center; /* Vertically centers the text and button */
-  margin: 0; /* Remove default margin from h2 */
-  padding: 0; /* Adjust if needed */
+  justify-content: space-between;
+  /* Positions text on left and button on right */
+  align-items: center;
+  /* Vertically centers the text and button */
+  margin: 0;
+  /* Remove default margin from h2 */
+  padding: 0;
+  /* Adjust if needed */
 }
 
 .report_item_summary {
@@ -227,7 +247,7 @@ footer a {
 }
 
 .report_item_summary p {
-  color:#818181;
+  color: #818181;
 }
 
 .content {
@@ -247,21 +267,115 @@ footer a {
 }
 
 .focalizer_pattern_row {
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: auto;
+  /* Enable horizontal scrolling */
   text-align: left;
 }
 
 .calculation_result {
-    width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
-    height: calc(100% - 10px); /* Subtracting 40px from the viewport height */
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #99999900;
-    border-radius: 8px;
+  width: calc(100% - 10px);
+  /* Subtracting 40px from the viewport width */
+  height: calc(100% - 10px);
+  /* Subtracting 40px from the viewport height */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #99999900;
+  border-radius: 8px;
 }
 
 .error {
-  color:rgb(220, 26, 26)
+  color: rgb(220, 26, 26)
+}
+
+.auth-button {
+  max-width: 200px;
+  /* Maximum button width */
+  width: 100%;
+  /* Scale to fit parent while respecting max-width */
+  box-sizing: border-box;
+  /* Includes padding in width calculations */
+}
+
+
+.navbar-default {
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-width: 0 0 1px;
+  border-color: #e7e7e7;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 56px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  /* Add some padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for depth */
+}
+
+.navbar-left {
+  margin-right: auto;
+  /* Push the right section away */
+}
+
+.navbar-title {
+  margin: 0;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-text {
+  margin: 0;
+  bottom: 0;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-button {
+  background-color: rgba(78, 11, 132, 0.7);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for buttons */
+.navbar-button:hover {
+  background-color: rgba(78, 11, 132);
+}
+
+/* Responsive: Adjust padding for smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+
+  .navbar-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+
+.main-content {
+  margin-top: 60px;
+  padding-top: 20px;
 }
