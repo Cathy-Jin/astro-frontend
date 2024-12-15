@@ -51,9 +51,9 @@ const Signup = () => {
                     <p>
                     {error}
                     <br />
-                    邮箱：<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/> 
+                    &ensp;&ensp;&ensp;&ensp;邮箱：<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/> 
                     <br />
-                    密码：<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    &ensp;&ensp;&ensp;&ensp;密码：<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                     <br />
                     确认密码：<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
                     </p>
