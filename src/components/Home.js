@@ -195,7 +195,7 @@ const Home = () => {
                 {result && (<div className="result">{renderResult(result, isDominantPlanetResultCollapsed, toggleDominantPlanetResultCollapse, isLifeThemeResultCollapsed, toggleLifeThemeResultCollapse)}</div>)}
                 <footer className="footer">
                     <hr />
-                    <p>&copy; {currentYear} The Author. All rights reserved. | <a href="mailto:cathyking716@gmail.com">Contact Me</a></p>
+                    <p>&copy; {currentYear} The Author. All rights reserved. | <a href="mailto:astro.archive.contact@gmail.com">Contact Me</a></p>
                 </footer>
             </div>
         </div>

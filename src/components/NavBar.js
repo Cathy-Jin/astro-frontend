@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 const NavBar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Listen to auth state changes
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
+    const email = sessionStorage.getItem('email'); 
+        if (email) {
+            setUser({email: email})
+        }
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await fetch('https://astro-notebook.onrender.com/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
       setUser(null);
+      sessionStorage.clear(); // clear session storage
       navigate('/'); // Redirect to home after logout
     } catch (error) {
       console.error("Error logging out:", error);

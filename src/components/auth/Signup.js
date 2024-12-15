@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -18,20 +17,29 @@ const Signup = () => {
             setError(<div className="error">两次密码输入不一致，请重试。</div>);
             return;
         }
+        // TODO: validate password
         try {
             // Create a new user with email and password
-            await createUserWithEmailAndPassword(auth, email, password);
+            const response = await fetch('https://astro-notebook.onrender.com/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email, password: password }),
+                credentials: 'include'
+            });
 
-            navigate('/');
-        } catch (err) {
-            if (err.code === 'auth/email-already-in-use') {
+            if (response.status === 201) {
+                setSuccess(<p>注册成功，正在跳转至<Link to="/signin">登录</Link>页面……</p>);
+                setError("");
+                setTimeout(() => navigate("/signin"), 3000); // Redirect after success
+            } else if (response.status === 409) {
                 setError(<div className="error">该邮箱已被注册。请<Link to='/signin'>登录</Link>或尝试新的邮箱。</div>);  
-            } else if (err.code === 'auth/weak-password') {
-                setError(<div className="error">密码必须不小于6位，请重试。</div>); 
-            }
-            else {
-                setError(<div className="error">注册未成功，请重试。{err.message}</div>); 
-            }
+            } else {
+                setError(<div className="error">注册未成功，请重试。</div>); 
+            }  
+        } catch (err) {
+            setError(<div className="error">注册未成功，请重试。{err.message}</div>);
         }
     };
 
@@ -52,6 +60,8 @@ const Signup = () => {
                 </div>
                 <button className="auth-button" type="submit">注册</button>
             </form>
+            <br />
+            {success}
         </div>
     );
 };

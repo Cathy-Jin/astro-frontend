@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "firebase/auth";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
@@ -12,10 +11,9 @@ const ResetPassword = () => {
 
     const handlePasswordReset = async (e) => {
         e.preventDefault();
-        const auth = getAuth();
-        const oobCode = searchParams.get("oobCode"); // Extract code from URL
+        const token = searchParams.get("token");
 
-        if (!oobCode) {
+        if (!token) {
             setError(<div className="error">网址有误，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
             return;
         }
@@ -26,31 +24,32 @@ const ResetPassword = () => {
         }
 
         try {
-            // Verify the code
-            await verifyPasswordResetCode(auth, oobCode);
+            const response = await fetch('https://astro-notebook.onrender.com/reset-password', {  //TODO: replace url
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token, password: password }),
+                credentials: 'include'
+            });
 
-            // Confirm the new password
-            await confirmPasswordReset(auth, oobCode, password);
-
-            setSuccess(<p>密码重置成功，正在跳转至<Link to="/signin">登录</Link>页面……</p>);
-            setError("");
-            setTimeout(() => navigate("/signin"), 3000); // Redirect after success
-        } catch (err) {
-            switch (err.code) {
-                case "auth/expired-action-code":
-                    setError(<div className="error">网址信息已过期，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
-                    break;
-                case "auth/invalid-action-code":
-                    setError(<div className="error">网址信息有误，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
-                    break;
-                case "auth/weak-password":
-                    setError(<div className="error">密码必须不小于6位，请重试。</div>); 
-                    break
-                default:
-                    setError(<div className="error">密码重置不成功，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
+            if (response.status === 201) {
+                setSuccess(<p>密码重置成功，正在跳转至<Link to="/signin">登录</Link>页面……</p>);
+                setError("");
+                setTimeout(() => navigate("/signin"), 3000); // Redirect after success
+            } else if (response.status === 400) {
+                setSuccess("")
+                setError(<div className="error">网址有误或已过期，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
             }
-            setSuccess("");
+            else {
+                setSuccess("")
+                setError(<div className="error">密码重置不成功，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
+            }
+        } catch (error) {
+            setSuccess("")
+            setError(<div className="error">密码重置不成功，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
         }
+
     };
 
     return (

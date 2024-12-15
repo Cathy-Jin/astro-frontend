@@ -1,21 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
 
 const Profile = () => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Listen to auth state changes
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-
-        // Cleanup subscription on unmount
-        return () => unsubscribe();
+        console.log('useEffect triggered');
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch('https://astro-notebook.onrender.com/profile', {  // TODO: replace url
+                    method: 'GET',
+                    headers: {
+                        // 'X-CSRF-TOKEN': document.cookie.match(/csrf_token=([^;]+)/)[1]
+                    },
+                    credentials: 'include'  // Include cookies in the request
+                });
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const email = sessionStorage.getItem('email');
+                    if (email === data.email) {
+                        setUser({ email: email });
+                    } else {
+                        sessionStorage.clear();
+                    }
+                } else {
+                    sessionStorage.clear();
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProfile();
     }, []);
+
+    if (loading) {
+        return <div><p>正在获取档案，请稍后。。。</p></div>;
+    }
 
     if (!user) {
         return <div><p>未登录，请<Link to="/signin">登录</Link>或<Link to="/signup">注册</Link>。</p></div>;

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
-import { auth } from '../../firebase';
 
 const Signin = () => {
     const [email, setEmail] = useState('');
@@ -13,23 +11,36 @@ const Signin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
-            await setPersistence(auth, persistence);
-            await signInWithEmailAndPassword(auth, email, password);
-            navigate('/'); // Redirect to the home page on success
-        } catch (err) {
-            if (err.code === 'auth/invalid-credential') {
+            const response = await fetch('https://astro-notebook.onrender.com/login', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email, password: password }),
+                credentials: 'include'
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                sessionStorage.setItem('email', data.email); 
+                navigate('/'); // Redirect to the home page on success  // TODO: extend session
+            } else {
                 setError(
                     <div className="error">
                         邮箱或密码不正确，请重试或
                         <Link to="/signup">注册</Link>
                         新用户。
-                    </div> // TODO: reset password
+                    </div>
                 );
-            } else {
-                setError(<div className="error">{err.message}</div>); // TODO: render other errors
             }
-
+        } catch (error) {
+            setError(
+                <div className="error">
+                    登录失败，请重试或
+                    <Link to="/signup">注册</Link>
+                    新用户。
+                </div>
+            );
         }
     };
 
