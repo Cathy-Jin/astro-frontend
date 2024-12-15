@@ -11,10 +11,11 @@ const Profile = () => {
         console.log('useEffect triggered');
         const fetchProfile = async () => {
             try {
-                const response = await fetch('https://astro-notebook.onrender.com/profile', {  // TODO: replace url
+                const response = await fetch('https://astro-notebook.onrender.com/profile', {  
                     method: 'GET',
                     headers: {
                         // 'X-CSRF-TOKEN': document.cookie.match(/csrf_token=([^;]+)/)[1]
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') 
                     },
                     credentials: 'include'  // Include cookies in the request
                 });

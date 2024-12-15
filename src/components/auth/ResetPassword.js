@@ -17,14 +17,13 @@ const ResetPassword = () => {
             setError(<div className="error">网址有误，请重试或返回<Link to="/signin">登录</Link>页面。</div>);
             return;
         }
-
         if (password !== confirmPassword) {
             setError(<div className="error">两次密码输入不一致，请重试。</div>);
             return;
         }
 
         try {
-            const response = await fetch('https://astro-notebook.onrender.com/reset-password', {  //TODO: replace url
+            const response = await fetch('https://astro-notebook.onrender.com/reset-password', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

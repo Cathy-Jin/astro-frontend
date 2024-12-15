@@ -23,7 +23,8 @@ const Signin = () => {
             if (response.status === 200) {
                 const data = await response.json();
                 sessionStorage.setItem('email', data.email); 
-                navigate('/'); // Redirect to the home page on success  // TODO: extend session
+                sessionStorage.setItem('access_token', data.access_token);
+                navigate('/'); // TODO: extend session
             } else {
                 setError(
                     <div className="error">

@@ -14,13 +14,6 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('https://astro-notebook.onrender.com/logout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      });
       setUser(null);
       sessionStorage.clear(); // clear session storage
       navigate('/'); // Redirect to home after logout
