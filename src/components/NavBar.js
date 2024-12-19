@@ -6,7 +6,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const email = sessionStorage.getItem('email'); 
+    const email = localStorage.getItem('email'); 
         if (email) {
             setUser({email: email})
         }
@@ -15,7 +15,7 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       setUser(null);
-      sessionStorage.clear(); // clear session storage
+      localStorage.clear(); 
       navigate('/'); // Redirect to home after logout
     } catch (error) {
       console.error("Error logging out:", error);

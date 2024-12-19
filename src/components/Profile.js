@@ -8,27 +8,26 @@ const Profile = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('useEffect triggered');
         const fetchProfile = async () => {
             try {
                 const response = await fetch('https://astro-notebook.onrender.com/profile', {  
                     method: 'GET',
                     headers: {
                         // 'X-CSRF-TOKEN': document.cookie.match(/csrf_token=([^;]+)/)[1]
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') 
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token') 
                     },
                     credentials: 'include'  // Include cookies in the request
                 });
                 if (response.status === 200) {
                     const data = await response.json();
-                    const email = sessionStorage.getItem('email');
+                    const email = localStorage.getItem('email');
                     if (email === data.email) {
                         setUser({ email: email });
                     } else {
-                        sessionStorage.clear();
+                        localStorage.clear();
                     }
                 } else {
-                    sessionStorage.clear();
+                    localStorage.clear();
                 }
             } catch (error) {
                 console.error('Error fetching profile:', error);

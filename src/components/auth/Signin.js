@@ -11,20 +11,20 @@ const Signin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://astro-notebook.onrender.com/login', { 
+            const response = await fetch('https://astro-notebook.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: email, password: password }),
+                body: JSON.stringify({ email: email, password: password, delta: rememberMe ? 24 : 1 }),
                 credentials: 'include'
             });
 
             if (response.status === 200) {
                 const data = await response.json();
-                sessionStorage.setItem('email', data.email); 
-                sessionStorage.setItem('access_token', data.access_token);
-                navigate('/'); // TODO: extend session
+                localStorage.setItem('email', data.email);
+                localStorage.setItem('access_token', data.access_token);
+                navigate('/');
             } else {
                 setError(
                     <div className="error">
@@ -64,7 +64,7 @@ const Signin = () => {
                 </div>
                 <button className="auth-button" type="submit">登录</button>
             </form>
-            
+
         </div>
     );
 };
