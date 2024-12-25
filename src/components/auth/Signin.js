@@ -23,6 +23,7 @@ const Signin = () => {
             if (response.status === 200) {
                 const data = await response.json();
                 localStorage.setItem('email', data.email);
+                localStorage.setItem('user_id', data.user_id);
                 localStorage.setItem('access_token', data.access_token);
                 navigate('/');
             } else {

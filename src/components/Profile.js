@@ -10,22 +10,16 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch('https://astro-notebook.onrender.com/profile', {  
+                const response = await fetch('https://astro-notebook.onrender.com/profile?user_id=' + localStorage.getItem("user_id"), {  
                     method: 'GET',
                     headers: {
                         // 'X-CSRF-TOKEN': document.cookie.match(/csrf_token=([^;]+)/)[1]
-                        'Authorization': 'Bearer ' + localStorage.getItem('access_token') 
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     },
                     credentials: 'include'  // Include cookies in the request
                 });
                 if (response.status === 200) {
-                    const data = await response.json();
-                    const email = localStorage.getItem('email');
-                    if (email === data.email) {
-                        setUser({ email: email });
-                    } else {
-                        localStorage.clear();
-                    }
+                    setUser({ email: localStorage.getItem('email') });
                 } else {
                     localStorage.clear();
                 }
