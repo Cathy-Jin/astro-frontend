@@ -36,7 +36,9 @@ label {
 }
 
 body {
-  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -49,14 +51,14 @@ body {
 h1 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 36px;
-  color: rgb(67, 10, 114)
+  color: rgb(67, 10, 114);
 }
 
 h2 {
   /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 24px;
   margin: 0 0 3px;
-  color: rgb(70, 15, 114)
+  color: rgb(70, 15, 114);
 }
 
 h3 {
@@ -161,7 +163,6 @@ footer a {
   color: rgba(78, 11, 132, 0.536);
   margin-top: 0px;
   margin-bottom: 0px;
-
 }
 
 .info_collector {
@@ -286,7 +287,7 @@ footer a {
 }
 
 .error {
-  color: rgb(220, 26, 26)
+  color: rgb(220, 26, 26);
 }
 
 .auth-button {
@@ -297,7 +298,6 @@ footer a {
   box-sizing: border-box;
   /* Includes padding in width calculations */
 }
-
 
 .navbar-default {
   background-color: #fff;
@@ -326,6 +326,10 @@ footer a {
 
 .navbar-title {
   margin: 0;
+}
+
+.no-underline {
+  text-decoration: none;
 }
 
 .navbar-right {
@@ -378,4 +382,24 @@ footer a {
 .main-content {
   margin-top: 60px;
   padding-top: 20px;
+}
+
+.user-profile-item {
+  height: calc(100% - 10px);
+  margin: 0 auto 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(222, 234, 223, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  text-align: center;
+}
+
+.user-profile-item p {
+  margin: 5px 0 0 0;
+}
+
+.profile-button {
+  margin: auto 10px auto 10px;
 }
