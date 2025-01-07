@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 const CreateProfile = () => {
   const [formData, setFormData] = useState({
-    name: "未命名档案",
+    name: "",
     year: "",
     month: "",
     day: "",
@@ -206,6 +207,7 @@ const CreateProfile = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

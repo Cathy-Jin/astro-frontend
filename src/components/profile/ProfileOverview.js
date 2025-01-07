@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
-
+import Footer from "../Footer";
 
 const ProfileOverview = () => {
   const [user, setUser] = useState(null);
@@ -90,14 +90,18 @@ const ProfileOverview = () => {
 
   if (!user) {
     return (
-      <div>
-        <p>
-          未登录，请<Link to="/signin">登录</Link>或
-          <Link to="/signup">注册</Link>。
-        </p>
-        <button className="auth-button" onClick={() => navigate("/")}>
-          返回首页
-        </button>
+      <div className="user-profile-overview">
+        <NavBar />
+        <div>
+          <p>
+            未登录，请重新<Link to="/signin">登录</Link>或
+            <Link to="/signup">注册</Link>。
+          </p>
+          <button className="auth-button" onClick={() => navigate("/")}>
+            返回首页
+          </button>
+        </div>
+        <Footer />
       </div>
     );
   }
@@ -125,11 +129,11 @@ const ProfileOverview = () => {
                 {profile.location}
               </p>
               <button
-              className="profile-button"
-              onClick={() => navigate("/life-theme?name=" + profile.name)}
-            >
-              人生主题解读
-            </button>
+                className="profile-button"
+                onClick={() => navigate("/life-theme?name=" + profile.name)}
+              >
+                人生主题解读
+              </button>
               <button
                 name="profile-button"
                 onClick={() => deleteProfile(profile.id, errors)}
@@ -141,6 +145,7 @@ const ProfileOverview = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   ); //TODO: reservation link
 };

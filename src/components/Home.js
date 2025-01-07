@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Home = () => {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
@@ -264,13 +265,7 @@ const Home = () => {
             )}
           </div>
         )}
-        <footer className="footer">
-          <hr />
-          <p>
-            &copy; 2024-{currentYear} Astro Archive. All rights reserved. |{" "}
-            <a href="mailto:astro.archive.contact@gmail.com">Contact Us</a>
-          </p>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

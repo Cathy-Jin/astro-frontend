@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 const LifeThemeGPT = () => {
   const [searchParams] = useSearchParams();
@@ -19,6 +20,7 @@ const LifeThemeGPT = () => {
           返回首页
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
