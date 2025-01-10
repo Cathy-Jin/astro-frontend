@@ -92,7 +92,7 @@ const ProfileOverview = () => {
     return (
       <div className="user-profile-overview">
         <NavBar />
-        <div>
+        <div className="main-content">
           <p>
             未登录，请重新<Link to="/signin">登录</Link>或
             <Link to="/signup">注册</Link>。
