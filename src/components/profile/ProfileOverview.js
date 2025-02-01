@@ -7,6 +7,7 @@ const ProfileOverview = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profiles, setProfiles] = useState(null);
+  const [generalError, setGeneralError] = useState("");
   const [errors, setErrors] = useState({}); // To track errors for each profile
 
   const navigate = useNavigate();
@@ -68,8 +69,13 @@ const ProfileOverview = () => {
           const data = await response.json();
           setUser({ email: localStorage.getItem("email") });
           setProfiles(data.profiles);
-        } else {
+        } else if (response.status === 403 || response.status === 401) {
           localStorage.clear();
+        } else {
+          setUser({ email: localStorage.getItem("email") });
+          setGeneralError(
+            <div className="error">无法找到档案信息，请重试。</div>
+          );
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -106,7 +112,6 @@ const ProfileOverview = () => {
     );
   }
 
-  // TODO: improve UI.
   return (
     <div className="user-profile-overview">
       <NavBar />
@@ -116,7 +121,8 @@ const ProfileOverview = () => {
           <Link to="/create-profile">+ 创建档案</Link>
         </h4>
         <div className="result">
-          {profiles.map((profile) => (
+          {generalError}
+          {profiles?.map((profile) => (
             <div className="user-profile-item" key={profile.id}>
               <h3>{profile.name}</h3>
               <p>
@@ -130,7 +136,11 @@ const ProfileOverview = () => {
               </p>
               <button
                 className="profile-button"
-                onClick={() => navigate("/life-theme?name=" + profile.name)}
+                onClick={() =>
+                  navigate("/life-theme?id=" + profile.id, {
+                    state: { profile },
+                  })
+                }
               >
                 人生主题解读
               </button>
@@ -147,7 +157,7 @@ const ProfileOverview = () => {
       </div>
       <Footer />
     </div>
-  ); //TODO: reservation link
+  );
 };
 
 export default ProfileOverview;

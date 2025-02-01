@@ -403,3 +403,60 @@ footer a {
 .profile-button {
   margin: auto 10px auto 10px;
 }
+
+.life_theme_item {
+  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+  height: calc(100% - 10px);
+  /* Subtracting 40px from the viewport height */
+  margin: 0 auto 10px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(222, 223, 234, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  /* Ensures hidden content does not affect layout */
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  /* Smooth transition for collapse */
+}
+
+.life_theme_item h2 {
+  display: flex;
+  justify-content: space-between;
+  /* Positions text on left and button on right */
+  align-items: center;
+  /* Vertically centers the text and button */
+  margin: 0;
+  /* Remove default margin from h2 */
+  padding: 0;
+  /* Adjust if needed */
+}
+
+.life_theme_item_summary {
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto;
+  padding: 10px 10px 5px 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: rgba(222, 223, 234, 0.7);
+}
+
+.life_theme_item_summary p {
+  color: #818181;
+  text-align: left;
+}
+
+.life_theme_item_collapse_btn {
+  background-color: rgba(13, 22, 117, 0.7);
+  font-size: 16px;
+}
+
+.life_theme_item_detail h3 {
+  text-align: left;
+  margin: 5px auto;
+  color: rgb(13, 22, 117);
+}
+
+.life_theme_item_detail ul{
+  text-align: left;
+}

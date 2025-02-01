@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
@@ -73,7 +74,10 @@ const Home = () => {
   };
 
   // Generate lists for each dropdown
-  const years = Array.from({ length: currentYear - 1920 + 1 }, (_, i) => currentYear - i);
+  const years = Array.from(
+    { length: currentYear - 1920 + 1 },
+    (_, i) => currentYear - i
+  );
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const hours = Array.from({ length: 24 }, (_, i) => i);
@@ -103,8 +107,7 @@ const Home = () => {
               <b>如何使用这个网站？</b>
               <br />
               如果你是一名现代占星爱好者，这个网站可以快速总结出占星规则之间的互动及其出现频率（由高到低），帮助你更轻松地解读星盘。
-              如果你对自我认知感兴趣，这个网站可以提供一个新的视角，
-              <b>结合其他工具</b>，帮助你更深入地理解自身的能量和潜能。
+              如果你对自我认知感兴趣，这个网站可以提供一个新的视角，帮助你更深入地理解自身的能量和潜能。
               <br />
               <br />
               <b>是否支持夏令时？</b>
@@ -124,7 +127,7 @@ const Home = () => {
               <br />
               <b>关键词和解读似乎过于抽象了？</b>
               <br />
-              网站主要用途为计算人生主题，关键词和解读仅供参考，具体星盘还是要具体分析。对解读内容有具体改进建议的话，欢迎随时联系我。
+              网站主要用途为计算人生主题，关键词和解读仅供参考。个性化解读目前只对注册用户开放。对解读内容有具体改进建议的话，欢迎随时联系我。
               <br />
               <br />
               <b>数字能量是否等于宫位？</b>
@@ -373,6 +376,12 @@ function renderThemes(
           </h2>
           <div className="report_item_summary">
             <p>
+              <b>
+                如果你需要更细致更个性化的解读，请<Link to="/signin">登录</Link>
+                并创建你的档案。
+              </b>
+            </p>
+            <p>
               在本命盘上出现三次及以上的占星规则的组合，就是人生主题。人生主题可以帮助认识自我以及指明成长的方向。计算结果按照能量出现的次数
               <b>从高到低</b>
               排列。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
@@ -406,10 +415,10 @@ function renderEnergy(e) {
         <b>关键词（仅供参考，需要结合星盘全局分析）</b>：
         {renderEnergyKeywords(e.principle_kws_cn, e.principle_nums)}
       </p>
-      <p>
+      {/* <p>
         <b>解读（仅供参考，需要结合星盘全局分析）</b>：<br />
         {e.interpretation_cn}
-      </p>
+      </p> */}
       <p>
         <b>星盘中出现次数</b>：{e.patterns_cn.length}
       </p>
