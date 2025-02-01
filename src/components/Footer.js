@@ -5,7 +5,7 @@ const Footer = () => {
       <hr />
       <p>
         &copy; 2024-{currentYear} Astro Archive. All rights reserved. |{" "}
-        <a href="mailto:astro.archive.contact@gmail.com">Contact Us</a>
+        <a href="mailto:astro.archive.contact@gmail.com">联系我们</a>
       </p>
     </footer>
   );

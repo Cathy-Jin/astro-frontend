@@ -288,6 +288,7 @@ footer a {
 
 .error {
   color: rgb(220, 26, 26);
+  text-align: center;
 }
 
 .auth-button {
