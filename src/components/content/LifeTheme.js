@@ -10,6 +10,7 @@ import Footer from "../Footer";
 
 const LifeThemeReading = () => {
   const [loading, setLoading] = useState(true);
+  const [rateLimiting, setRateLimiting] = useState(false);
   const [error, setError] = useState("");
   const [reading, setReading] = useState({});
 
@@ -19,6 +20,8 @@ const LifeThemeReading = () => {
   const profile = location.state?.profile; // Get from router state
 
   const navigate = useNavigate();
+
+  const RATE_LIMIT_MS = 5000; // 5 seconds
 
   useEffect(() => {
     const fetchLifeTheme = async () => {
@@ -66,9 +69,21 @@ const LifeThemeReading = () => {
         console.error("Error fetching profile:", error);
       } finally {
         setLoading(false);
+        setRateLimiting(false);
       }
     };
-    fetchLifeTheme();
+
+    const lastFetch = sessionStorage.getItem("lastFetchTime");
+    const now = Date.now();
+
+    if (lastFetch && now - lastFetch <= RATE_LIMIT_MS) {
+      setLoading(false);
+      setRateLimiting(true);
+    } else {
+      // Allow API call if no timestamp or enough time has passed
+      fetchLifeTheme();
+      sessionStorage.setItem("lastFetchTime", now);
+    }
   }, [profile_id]);
 
   if (!profile) {
@@ -106,9 +121,12 @@ const LifeThemeReading = () => {
           </div>
           {loading && (
             <p>
-              正在努力生成专属于你的个性化解读，可能需要几分钟的时间，谢谢你的耐心等待！
+              正在努力生成专属于你的个性化解读，可能需要几分钟的时间，请勿刷新页面。谢谢你的耐心等待！
             </p>
           )}
+          {
+            rateLimiting && (<div className="error">请勿频繁刷新页面。稍后再试，谢谢。</div>)
+          }
           {error}
         </div>
 
@@ -147,16 +165,26 @@ function LifeThemeItemReading({ life_theme }) {
             <>
               <h3>💡</h3>
               <ul>
-                <li><b>生活</b> {life_theme.reading.suggestions.life}</li>
-                <li><b>学习</b> {life_theme.reading.suggestions.study}</li>
-                <li><b>工作</b> {life_theme.reading.suggestions.work}</li>
-                <li><b>人际</b> {life_theme.reading.suggestions.relationship}</li>
+                <li>
+                  <b>生活</b> {life_theme.reading.suggestions.life}
+                </li>
+                <li>
+                  <b>学习</b> {life_theme.reading.suggestions.study}
+                </li>
+                <li>
+                  <b>工作</b> {life_theme.reading.suggestions.work}
+                </li>
+                <li>
+                  <b>人际</b> {life_theme.reading.suggestions.relationship}
+                </li>
               </ul>
               <h3>星盘中表现形式</h3>
               <ul>
                 {life_theme.reading.details?.map((detail) => (
                   <li>
-                    <p><b>{detail.pattern}</b> {detail.interpretation}</p>
+                    <p>
+                      <b>{detail.pattern}</b> {detail.interpretation}
+                    </p>
                   </li>
                 ))}
               </ul>
