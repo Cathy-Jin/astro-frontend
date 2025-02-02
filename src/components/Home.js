@@ -7,9 +7,9 @@ const Home = () => {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(false); // Add loading state
-  const [isDominantPlanetResultCollapsed, setIsDominantPlanetResultCollapsed] =
+  const [isDominantPlanetResultOpen, setIsDominantPlanetResultOpen] =
     useState(false);
-  const [isLifeThemeResultCollapsed, setIsLifeThemeResultCollapsed] =
+  const [isLifeThemeResultOpen, setIsLifeThemeResultOpen] =
     useState(false);
 
   const [formData, setFormData] = useState({
@@ -35,11 +35,11 @@ const Home = () => {
   };
 
   const toggleDominantPlanetResultCollapse = () => {
-    setIsDominantPlanetResultCollapsed(!isDominantPlanetResultCollapsed);
+    setIsDominantPlanetResultOpen(!isDominantPlanetResultOpen);
   };
 
   const toggleLifeThemeResultCollapse = () => {
-    setIsLifeThemeResultCollapsed(!isLifeThemeResultCollapsed);
+    setIsLifeThemeResultOpen(!isLifeThemeResultOpen);
   };
 
   // Handler for checkbox change (DST)
@@ -49,8 +49,8 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsDominantPlanetResultCollapsed(false);
-    setIsLifeThemeResultCollapsed(false);
+    setIsDominantPlanetResultOpen(false);
+    setIsLifeThemeResultOpen(false);
     setLoading(true); // Start loading
     try {
       const response = await fetch(
@@ -261,9 +261,9 @@ const Home = () => {
           <div className="result">
             {renderResult(
               result,
-              isDominantPlanetResultCollapsed,
+              isDominantPlanetResultOpen,
               toggleDominantPlanetResultCollapse,
-              isLifeThemeResultCollapsed,
+              isLifeThemeResultOpen,
               toggleLifeThemeResultCollapse
             )}
           </div>
@@ -276,9 +276,9 @@ const Home = () => {
 
 function renderResult(
   result,
-  isDominantPlanetResultCollapsed,
+  isDominantPlanetResultOpen,
   toggleDominantPlanetResultCollapse,
-  isLifeThemeResultCollapsed,
+  isLifeThemeResultOpen,
   toggleLifeThemeResultCollapse
 ) {
   // Handle errors first
@@ -327,13 +327,13 @@ function renderResult(
       <>
         {renderPlanetaryFocalizers(
           result.planet_focalizers,
-          isDominantPlanetResultCollapsed,
+          isDominantPlanetResultOpen,
           toggleDominantPlanetResultCollapse
         )}
         <br />
         {renderThemes(
           result.themes,
-          isLifeThemeResultCollapsed,
+          isLifeThemeResultOpen,
           toggleLifeThemeResultCollapse
         )}
       </>
@@ -349,8 +349,8 @@ function renderResult(
 
 function renderThemes(
   themes,
-  isLifeThemeResultCollapsed,
-  toggleLifeThemeResultCollapse
+  isLifeThemeResultOpen,
+  toggleLifeThemeResultOpen
 ) {
   if (themes.length === 0) {
     return (
@@ -369,15 +369,15 @@ function renderThemes(
             人生主题{" "}
             <button
               className="collapse-btn"
-              onClick={toggleLifeThemeResultCollapse}
+              onClick={toggleLifeThemeResultOpen}
             >
-              {isLifeThemeResultCollapsed ? "+" : "-"}
+              {isLifeThemeResultOpen ? "-" : "+"}
             </button>
           </h2>
           <div className="report_item_summary">
             <p>
               <b>
-                如果你需要更细致更个性化的解读，请<Link to="/signin">登录</Link>
+                如果你需要更细致更个性化的解读，请<Link to="/signup">注册</Link>
                 并创建你的档案。
               </b>
             </p>
@@ -387,10 +387,8 @@ function renderThemes(
               排列。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
             </p>
           </div>
-          <div
-            className={`content ${isLifeThemeResultCollapsed ? "hidden" : ""}`}
-          >
-            {!isLifeThemeResultCollapsed && renderThemesContent(themes)}
+          <div>
+            {isLifeThemeResultOpen && renderThemesContent(themes)}
           </div>
         </div>
       </>
@@ -460,8 +458,8 @@ function renderEnergyKeywords(kws, p_nums) {
 
 function renderPlanetaryFocalizers(
   focalizers,
-  isDominantPlanetResultCollapsed,
-  toggleDominantPlanetResultCollapse
+  isDominantPlanetResultOpen,
+  toggleDominantPlanetResultOpen
 ) {
   if (focalizers.length === 0) {
     return (
@@ -480,9 +478,9 @@ function renderPlanetaryFocalizers(
             重点行星{" "}
             <button
               className="collapse-btn"
-              onClick={toggleDominantPlanetResultCollapse}
+              onClick={toggleDominantPlanetResultOpen}
             >
-              {isDominantPlanetResultCollapsed ? "+" : "-"}
+              {isDominantPlanetResultOpen ? "-" : "+"}
             </button>
           </h2>
           <div className="report_item_summary">
@@ -490,12 +488,8 @@ function renderPlanetaryFocalizers(
               重点行星是本命盘中能量强大的行星，对全局有较为突出的影响。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
             </p>
           </div>
-          <div
-            className={`content ${
-              isDominantPlanetResultCollapsed ? "hidden" : ""
-            }`}
-          >
-            {!isDominantPlanetResultCollapsed &&
+          <div>
+            {isDominantPlanetResultOpen &&
               renderFocalizersContent(focalizers)}
           </div>
         </div>
