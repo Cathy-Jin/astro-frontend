@@ -26,6 +26,8 @@ const LifeThemeReading = () => {
   useEffect(() => {
     const fetchLifeTheme = async () => {
       try {
+        setLoading(true);
+        setRateLimiting(false);
         const response = await fetch(
           "https://astro-notebook.onrender.com/life-theme",
           {
@@ -81,9 +83,10 @@ const LifeThemeReading = () => {
       setRateLimiting(true);
     } else {
       // Allow API call if no timestamp or enough time has passed
+      setRateLimiting(false);
       fetchLifeTheme();
-      sessionStorage.setItem("lastFetchTime", now);
     }
+    sessionStorage.setItem("lastFetchTime", now);
   }, [profile_id]);
 
   if (!profile) {
@@ -121,11 +124,11 @@ const LifeThemeReading = () => {
           </div>
           {loading && (
             <p>
-              正在努力生成专属于你的个性化解读，可能需要几分钟的时间，请勿刷新页面。谢谢你的耐心等待！
+              正在努力生成专属于{profile.name}的个性化解读，可能需要几分钟的时间，<b>请勿刷新页面</b>。谢谢你的耐心等待！
             </p>
           )}
           {
-            rateLimiting && (<div className="error">请勿频繁刷新页面。稍后再试，谢谢。</div>)
+            rateLimiting && (<div className="error">请勿频繁刷新页面。10秒后再试哦~</div>)
           }
           {error}
         </div>
