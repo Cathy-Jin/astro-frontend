@@ -7,6 +7,7 @@ const ProfileOverview = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profiles, setProfiles] = useState(null);
+  const [isDeleteDisabled, setIsDeleteDisabled] = useState([]);
   const [generalError, setGeneralError] = useState("");
   const [errors, setErrors] = useState({}); // To track errors for each profile
 
@@ -14,6 +15,13 @@ const ProfileOverview = () => {
 
   // Handle profile deletion
   const deleteProfile = async (id) => {
+    if (isDeleteDisabled[id]) return;
+
+    setIsDeleteDisabled((prev) => ({
+      ...prev,
+      [id]: true,
+    }));
+    // await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate API delay
     try {
       const response = await fetch(
         "https://astro-notebook.onrender.com/profile",
@@ -49,6 +57,10 @@ const ProfileOverview = () => {
         [id]: <div className="error">删除失败，请刷新或重试。</div>,
       }));
     }
+    setIsDeleteDisabled((prev) => ({
+      ...prev,
+      [id]: false,
+    }));
   };
 
   useEffect(() => {
@@ -147,8 +159,9 @@ const ProfileOverview = () => {
               <button
                 name="profile-button"
                 onClick={() => deleteProfile(profile.id, errors)}
+                disabled={isDeleteDisabled[profile.id]}
               >
-                删除档案
+                {isDeleteDisabled[profile.id] ? "正在删除……" : "删除档案"}
               </button>
               {errors[profile.id]}
             </div>

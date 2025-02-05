@@ -17,6 +17,7 @@ const CreateProfile = () => {
     user_id: localStorage.getItem("user_id"),
   });
   const [error, setError] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,6 +26,10 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isDisabled) return;
+
+    setIsDisabled(true);
+    //await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate API delay
     try {
       const response = await fetch(
         "https://astro-notebook.onrender.com/profile",
@@ -62,6 +67,7 @@ const CreateProfile = () => {
     } catch (error) {
       setError(<div className="error">档案创建失败，请刷新或重试。</div>);
     }
+    setIsDisabled(false);
   };
 
   // Generate lists for each dropdown
@@ -83,7 +89,7 @@ const CreateProfile = () => {
         <h1>创建档案</h1>
         {error}
         <div className="info_collector">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} disabled={isDisabled}>
             <div className="profile-name-row">
               <p>
                 <b>档案名称</b>
@@ -203,7 +209,9 @@ const CreateProfile = () => {
                 />
               </p>
             </div>
-            <button type="submit">创建档案</button>
+            <button type="submit" disabled={isDisabled}>
+              {isDisabled ? "正在创建……" : "创建档案"}
+            </button>
           </form>
         </div>
       </div>
