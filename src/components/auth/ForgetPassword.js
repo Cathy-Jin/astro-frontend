@@ -4,9 +4,13 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleForgetPassword = async (e) => {
     e.preventDefault();
+    if (isDisabled) return;
+
+    setIsDisabled(true);
     try {
       const response = await fetch(
         "https://astro-notebook.onrender.com/forget-password",
@@ -33,6 +37,7 @@ const ForgetPassword = () => {
       setMessage("");
       setError(<div className="error">重置密码邮件发送未成功，请重试。</div>);
     }
+    setIsDisabled(false);
   };
 
   return (
@@ -52,8 +57,8 @@ const ForgetPassword = () => {
             />
           </p>
         </div>
-        <button className="auth-button" type="submit">
-          重置密码
+        <button className="auth-button" type="submit" disabled={isDisabled}>
+          {isDisabled ? "正在验证……" : "重置密码"}
         </button>
       </form>
       <br />

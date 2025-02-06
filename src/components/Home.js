@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [loading, setLoading] = useState(false); // Add loading state
   const [isDominantPlanetResultOpen, setIsDominantPlanetResultOpen] =
     useState(false);
@@ -49,9 +50,12 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isDisabled) return;
     setIsDominantPlanetResultOpen(false);
     setIsLifeThemeResultOpen(false);
     setLoading(true); // Start loading
+
+    setIsDisabled(true);
     try {
       const response = await fetch(
         "https://astro-notebook.onrender.com/report",
@@ -71,6 +75,7 @@ const Home = () => {
     } finally {
       setLoading(false); // Stop loading when request completes
     }
+    setIsDisabled(false);
   };
 
   // Generate lists for each dropdown
@@ -249,7 +254,7 @@ const Home = () => {
                 />
               </p>
             </div>
-            <button type="submit">生成结果</button>
+            <button type="submit" disabled={isDisabled}>生成结果</button>
           </form>
         </div>
         {loading && (
@@ -268,8 +273,8 @@ const Home = () => {
             )}
           </div>
         )}
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

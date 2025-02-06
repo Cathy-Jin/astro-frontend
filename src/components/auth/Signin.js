@@ -4,11 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    if (isDisabled) return;
+
+    setIsDisabled(true);
     e.preventDefault();
     try {
       const response = await fetch(
@@ -51,6 +55,7 @@ const Signin = () => {
         </div>
       );
     }
+    setIsDisabled(false);
   };
 
   return (
@@ -87,8 +92,8 @@ const Signin = () => {
             <Link to="/forget-password">忘记密码？</Link>
           </p>
         </div>
-        <button className="auth-button" type="submit">
-          登录
+        <button className="auth-button" type="submit" disabled={isDisabled}>
+          {isDisabled ? "正在登录……" : "登录"}
         </button>
       </form>
     </div>

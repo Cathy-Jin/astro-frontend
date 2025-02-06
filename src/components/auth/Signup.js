@@ -5,11 +5,14 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
+    if (isDisabled) return;
+
     e.preventDefault();
 
     // Check if passwords match
@@ -17,6 +20,8 @@ const Signup = () => {
       setError(<div className="error">两次密码输入不一致，请重试。</div>);
       return;
     }
+
+    setIsDisabled(true);
     // TODO: validate password
     try {
       // Create a new user with email and password
@@ -52,6 +57,7 @@ const Signup = () => {
     } catch (err) {
       setError(<div className="error">注册未成功，请重试。{err.message}</div>);
     }
+    setIsDisabled(false);
   };
 
   return (
@@ -87,8 +93,8 @@ const Signup = () => {
             />
           </p>
         </div>
-        <button className="auth-button" type="submit">
-          注册
+        <button className="auth-button" type="submit" disabled={isDisabled}>
+          {isDisabled ? "正在注册……" : "注册"}
         </button>
       </form>
       <br />

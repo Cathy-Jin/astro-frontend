@@ -4,6 +4,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [searchParams] = useSearchParams();
@@ -11,6 +12,9 @@ const ResetPassword = () => {
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
+    if (isDisabled) return;
+
+    setIsDisabled(true);
     const token = searchParams.get("token");
 
     if (!token) {
@@ -70,6 +74,7 @@ const ResetPassword = () => {
         </div>
       );
     }
+    setIsDisabled(false);
   };
 
   return (
@@ -97,8 +102,8 @@ const ResetPassword = () => {
             />
           </p>
         </div>
-        <button className="auth-button" type="submit">
-          重置密码
+        <button className="auth-button" type="submit" disabled={isDisabled}>
+          {isDisabled ? "正在重置……" : "重置密码"}
         </button>
       </form>
       <br />
