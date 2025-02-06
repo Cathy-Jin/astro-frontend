@@ -1,33 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  useLocation,
-  useSearchParams,
-  useNavigate,
-  Link,
-} from "react-router-dom";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
+import { Link } from "react-router-dom";
 
-const LifeThemeReading = () => {
+const LifeThemeReading = ({ profile_id, onDataLoaded }) => {
   const [loading, setLoading] = useState(true);
-  const [rateLimiting, setRateLimiting] = useState(false);
   const [error, setError] = useState("");
   const [reading, setReading] = useState({});
-
-  const [searchParams] = useSearchParams();
-  const profile_id = searchParams.get("id") || "";
-  const location = useLocation();
-  const profile = location.state?.profile; // Get from router state
-
-  const navigate = useNavigate();
-
-  const RATE_LIMIT_MS = 5000; // 5 seconds
 
   useEffect(() => {
     const fetchLifeTheme = async () => {
       try {
         setLoading(true);
-        setRateLimiting(false);
         const response = await fetch(
           "https://astro-notebook.onrender.com/life-theme",
           {
@@ -71,77 +53,28 @@ const LifeThemeReading = () => {
         console.error("Error fetching profile:", error);
       } finally {
         setLoading(false);
-        setRateLimiting(false);
+        onDataLoaded();
       }
     };
 
-    const lastFetch = sessionStorage.getItem("lastFetchTime");
-    const now = Date.now();
-
-    if (lastFetch && now - lastFetch <= RATE_LIMIT_MS) {
-      setLoading(false);
-      setRateLimiting(true);
-    } else {
-      // Allow API call if no timestamp or enough time has passed
-      setRateLimiting(false);
-      fetchLifeTheme();
-    }
-    sessionStorage.setItem("lastFetchTime", now);
-  }, [profile_id]);
-
-  if (!profile) {
-    return (
-      <div className="life-theme-reading">
-        <NavBar />
-        <div className="main-content">
-          <p>无法找到档案信息，请重试。</p>
-          <button className="auth-button" onClick={() => navigate("/profile")}>
-            返回我的档案
-          </button>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+    fetchLifeTheme();
+  }, [profile_id, onDataLoaded]);
 
   return (
     <div className="life-theme-reading">
-      <NavBar />
-      <div className="main-content">
-        <h1>人生主题解读（仅供参考）</h1>
-        <div className="result">
-          <div className="user-profile-item" key={profile.id}>
-            <h3>{profile.name}</h3>
-            <p>
-              <b>出生时间：</b>
-              {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
-              {profile.minute}分
-            </p>
-            <p>
-              <b>出生地点：</b>
-              {profile.location}
-            </p>
-          </div>
-          {loading && (
-            <p>
-              正在努力生成专属于{profile.name}的个性化解读，可能需要几分钟的时间，<b>请勿刷新页面</b>。谢谢你的耐心等待！
-            </p>
-          )}
-          {
-            rateLimiting && (<div className="error">请勿频繁刷新页面。10秒后再试哦~</div>)
-          }
-          {error}
-        </div>
+      <div className="result">
+        {loading && (
+          <p>
+            正在努力生成专属于你的个性化解读，可能需要几分钟的时间，
+            <b>请勿刷新页面</b>。谢谢你的耐心等待！
+          </p>
+        )}
+        {error}
 
         {reading.life_themes?.map((life_theme, index) => (
           <LifeThemeItemReading key={index} life_theme={life_theme} />
         ))}
-
-        <button className="auth-button" onClick={() => navigate("/profile")}>
-          返回我的档案
-        </button>
       </div>
-      <Footer />
     </div>
   );
 };
