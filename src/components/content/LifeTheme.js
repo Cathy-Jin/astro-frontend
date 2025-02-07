@@ -60,6 +60,12 @@ const LifeThemeReading = () => {
               今日的解读名额已满，感谢您的支持与关注。北京时间每天8AM准时刷新名额，记得到时候来试试哦~
             </div>
           );
+        } else if (response.status === 409) {
+          setError(
+            <div className="error">
+              正在努力生成专属于{profile.name}的个性化解读，可能需要几分钟的时间。谢谢你的耐心等待！
+            </div>
+          );
         } else {
           setError(
             <div className="error">
