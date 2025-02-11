@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
       <NavBar />
       <div className="main-content">
         <h1>隐私政策</h1>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <p>
             最后更新日期： 2025年2月10日
             <br />
@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
           </p>
           <hr />
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>我们收集的信息</h3>
           <p>
             <b>直接提供的信息：</b>
@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
             </ul>
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>信息使用方式</h3>
           <p>
             <b>核心用途：</b>
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
             </ul>
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>数据存储与安全</h3>
           <p>
             <b>存储位置：</b>
@@ -82,7 +82,7 @@ const PrivacyPolicy = () => {
             </ul>
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>数据共享与披露</h3>
           <p>
             <b>我们不会主动共享您的个人信息</b>，除非：
@@ -99,7 +99,7 @@ const PrivacyPolicy = () => {
             </ul>
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>您的权利</h3>
           <p>
             <b>访问与更正：</b>您可随时登录账户查看或修改提交的数据。
@@ -114,13 +114,13 @@ const PrivacyPolicy = () => {
             您可通过浏览器设置拒绝非必要Cookies，但可能导致部分功能不可用。
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>政策变更</h3>
           <p>
             我们保留修改本政策的权利，变更将通过网站公告或注册邮箱通知生效。继续使用服务即视为接受更新后的政策。
           </p>
         </div>
-        <div className="privacy-policy-item">
+        <div className="term-item">
           <h3>联系我们</h3>
           <p>
             如有疑问，请通过

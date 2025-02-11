@@ -10,6 +10,7 @@ import ProfileOverview from "./components/profile/ProfileOverview";
 import CreateProfile from "./components/profile/CreateProfile";
 import LifeThemeReading from "./components/content/LifeTheme";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import Term from "./components/Term";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/create-profile" element={<CreateProfile />} />
           <Route path="/life-theme" element={<LifeThemeReading />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/term" element={<Term />} />
         </Routes>
       </Router>
     </div>

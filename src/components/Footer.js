@@ -8,7 +8,7 @@ const Footer = () => {
       <p>
         &copy; 2024-{currentYear} Astro Archive. All rights reserved. 
         <br />
-        <Link to="/privacy-policy">隐私政策</Link> | <a href="mailto:astro.archive.contact@gmail.com">联系我们</a>
+        <Link to="/term">服务条款</Link> | <Link to="/privacy-policy">隐私政策</Link> | <a href="mailto:astro.archive.contact@gmail.com">联系我们</a>
       </p>
     </footer>
   );
