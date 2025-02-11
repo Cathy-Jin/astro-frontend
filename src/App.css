@@ -461,3 +461,14 @@ footer a {
 .life_theme_item_detail ul{
   text-align: left;
 }
+
+.privacy-policy-item {
+  text-align: left;
+  margin: 10px auto 10px auto;
+}
+
+.privacy-policy-item h3 {
+  text-align: left;
+  margin: 5px auto;
+  color: rgba(78, 11, 132, 0.85);
+}

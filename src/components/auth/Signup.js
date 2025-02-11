@@ -93,6 +93,7 @@ const Signup = () => {
             />
           </p>
         </div>
+        <p>点击“注册”即表示您同意我们的<Link to="/privacy-policy">隐私政策</Link>。</p>
         <button className="auth-button" type="submit" disabled={isDisabled}>
           {isDisabled ? "正在注册……" : "注册"}
         </button>

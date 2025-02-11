@@ -9,6 +9,7 @@ import ResetPassword from "./components/auth/ResetPassword";
 import ProfileOverview from "./components/profile/ProfileOverview";
 import CreateProfile from "./components/profile/CreateProfile";
 import LifeThemeReading from "./components/content/LifeTheme";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/profile" element={<ProfileOverview />} />
           <Route path="/create-profile" element={<CreateProfile />} />
-          <Route path="/life-theme" element={<LifeThemeReading/>} />
+          <Route path="/life-theme" element={<LifeThemeReading />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </Router>
     </div>
