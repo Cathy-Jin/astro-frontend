@@ -127,7 +127,7 @@ const Feedback = () => {
                 />
               </p>
             </div>
-            <p>点击“提交”即表示您理解并同意我们的<Link to="/privacy-policy">隐私政策</Link>。</p>
+            <p>点击“提交”即表示您理解并同意我们的<Link to="/term">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
             <button type="submit" disabled={isDisabled}>
               {isDisabled? "提交中……" : "提交"}
             </button>
