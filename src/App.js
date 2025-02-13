@@ -11,6 +11,7 @@ import CreateProfile from "./components/profile/CreateProfile";
 import LifeThemeReading from "./components/content/LifeTheme";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Term from "./components/Term";
+import Feedback from "./components/Feedback";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/life-theme" element={<LifeThemeReading />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/term" element={<Term />} />
+          <Route path="/feedback" element={<Feedback />} />
         </Routes>
       </Router>
     </div>

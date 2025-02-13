@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 const Term = () => {
   return (
-    <div className="privacy-policy">
+    <div className="term">
       <NavBar />
       <div className="main-content">
         <h1>服务条款</h1>

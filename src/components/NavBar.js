@@ -39,6 +39,12 @@ const NavBar = () => {
             <button className="navbar-button" onClick={handleLogout}>
               登出
             </button>
+            <button
+              className="navbar-button-2"
+              onClick={() => navigate("/feedback")}
+            >
+              意见反馈
+            </button>
           </div>
         ) : (
           <div className="navbar-links">
@@ -53,6 +59,12 @@ const NavBar = () => {
               onClick={() => navigate("/signup")}
             >
               注册
+            </button>
+            <button
+              className="navbar-button-2"
+              onClick={() => navigate("/feedback")}
+            >
+              意见反馈
             </button>
           </div>
         )}
