@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 
-const Term = () => {
+const TermsOfService = () => {
   return (
     <div className="term">
       <NavBar />
@@ -116,4 +116,4 @@ const Term = () => {
   );
 };
 
-export default Term;
+export default TermsOfService;

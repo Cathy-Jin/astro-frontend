@@ -149,12 +149,12 @@ const ProfileOverview = () => {
               <button
                 className="profile-button"
                 onClick={() =>
-                  navigate("/life-theme?id=" + profile.id, {
+                  navigate("/profile-detail?id=" + profile.id, {
                     state: { profile },
                   })
                 }
               >
-                人生主题解读
+                查看档案
               </button>
               <button
                 name="profile-button"

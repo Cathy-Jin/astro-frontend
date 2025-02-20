@@ -80,6 +80,8 @@ const Feedback = () => {
                 如果你愿意的话，也可以留个联系方式，方便我们和你聊聊～
                 <br />
                 我们不会把你的信息透露给第三方🔒
+                <br /> 
+                如有疑问，欢迎发送邮件至<a href="mailto:astro.archive.contact@gmail.com">astro.archive.contact@gmail.com</a>联系我们。
               </b></p>
             </div>
             <div className="feedback-row">
@@ -127,7 +129,7 @@ const Feedback = () => {
                 />
               </p>
             </div>
-            <p>点击“提交”即表示您理解并同意我们的<Link to="/term">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
+            <p>点击“提交”即表示您理解并同意我们的<Link to="/terms-of-service">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
             <button type="submit" disabled={isDisabled}>
               {isDisabled? "提交中……" : "提交"}
             </button>

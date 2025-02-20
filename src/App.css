@@ -423,7 +423,7 @@ footer a {
 }
 
 .profile-button {
-  margin: auto 10px auto 10px;
+  margin: 10px 10px 10px 10px;
 }
 
 .life_theme_item {
@@ -481,6 +481,38 @@ footer a {
 
 .life_theme_item_detail ul{
   text-align: left;
+}
+
+.natal-chart-item {
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto;
+  padding: 10px 10px 5px 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  /*background-color: rgba(222, 223, 234, 0.7);*/
+}
+
+.natal-chart-table th {
+  background-color: rgba(222, 234, 223, 0.7);
+  color: #818181;
+  padding: 0;
+  margin: 5px 0;
+  min-width: 30px;
+}
+
+.natal-chart-table td {
+  padding: 0;
+  margin: 5px 0;
+  min-width: 30px;
+}
+
+.natal-chart-table td p {
+  margin: 3px 0;
+}
+
+.natal-chart-table th p {
+  margin: 3px 0;
 }
 
 .term-item {

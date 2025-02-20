@@ -10,8 +10,9 @@ import ProfileOverview from "./components/profile/ProfileOverview";
 import CreateProfile from "./components/profile/CreateProfile";
 import LifeThemeReading from "./components/content/LifeTheme";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-import Term from "./components/Term";
+import TermsOfService from "./components/TermsOfService";
 import Feedback from "./components/Feedback";
+import NatalChat from "./components/content/NatalChart";
 
 const App = () => {
   return (
@@ -26,8 +27,9 @@ const App = () => {
           <Route path="/profile" element={<ProfileOverview />} />
           <Route path="/create-profile" element={<CreateProfile />} />
           <Route path="/life-theme" element={<LifeThemeReading />} />
+          <Route path="/profile-detail" element={<NatalChat />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/term" element={<Term />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/feedback" element={<Feedback />} />
         </Routes>
       </Router>

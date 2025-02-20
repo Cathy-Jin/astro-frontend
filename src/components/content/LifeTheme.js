@@ -63,7 +63,8 @@ const LifeThemeReading = () => {
         } else if (response.status === 409) {
           setError(
             <div className="error">
-              正在努力生成专属于{profile.name}的个性化解读，可能需要几分钟的时间。谢谢你的耐心等待！
+              正在努力生成专属于{profile.name}
+              的个性化解读，可能需要几分钟的时间。谢谢你的耐心等待！
             </div>
           );
         } else {
@@ -95,7 +96,7 @@ const LifeThemeReading = () => {
     sessionStorage.setItem("lastFetchTime", now);
   }, [profile_id]);
 
-  if (!profile) {
+  if (!profile || profile.id !== profile_id) {
     return (
       <div className="life-theme-reading">
         <NavBar />
@@ -129,13 +130,15 @@ const LifeThemeReading = () => {
             </p>
           </div>
           {loading && (
-            <p>
-              正在努力生成专属于{profile.name}的个性化解读，可能需要几分钟的时间，<b>请勿刷新页面</b>。谢谢你的耐心等待！
+            <p textAlign="center">
+              正在努力生成专属于{profile.name}
+              的个性化解读，可能需要几分钟的时间，<b>请勿刷新页面</b>
+              。谢谢你的耐心等待！
             </p>
           )}
-          {
-            rateLimiting && (<div className="error">请勿频繁刷新页面。10秒后再试哦~</div>)
-          }
+          {rateLimiting && (
+            <div className="error">请勿频繁刷新页面。10秒后再试哦~</div>
+          )}
           {error}
         </div>
 
@@ -143,8 +146,15 @@ const LifeThemeReading = () => {
           <LifeThemeItemReading key={index} life_theme={life_theme} />
         ))}
 
-        <button className="auth-button" onClick={() => navigate("/profile")}>
-          返回我的档案
+        <button
+          className="profile-button"
+          onClick={() =>
+            navigate("/profile-detail?id=" + profile.id, {
+              state: { profile },
+            })
+          }
+        >
+          返回档案详情
         </button>
       </div>
       <Footer />
