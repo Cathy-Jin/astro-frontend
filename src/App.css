@@ -1,40 +1,4 @@
-.App {
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-select {
-  padding: 5px;
-  font-size: 14px;
-  margin-top: 5px;
-  margin-right: 8px;
-  margin-left: 8px;
-  white-space: nowrap;
-  /* Prevents text from wrapping */
-}
-
-input {
-  font-size: 14px;
-  margin-top: 5px;
-  margin-right: 8px;
-  margin-left: 8px;
-  white-space: nowrap;
-  /* Prevents text from wrapping */
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
-
+/* ========== GLOBAL STYLES ========== */
 body {
   font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
     "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
@@ -48,89 +12,68 @@ body {
   margin: 5%;
 }
 
+.App {
+  text-align: center;
+  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
+}
+
+/* Typography */
+h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
+
 h1 {
-  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 36px;
   color: rgb(67, 10, 114);
 }
 
 h2 {
-  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
   font-size: 24px;
-  margin: 0 0 3px;
+  margin-bottom: 3px;
   color: rgb(70, 15, 114);
 }
 
 h3 {
-  /* font-family: -apple-system, SF UI Display, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif; */
-  margin: -7px 0 2px 0;
-  display: inherit;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
+  margin: -7px 0 2px 0;
+  display: inherit;
+  color: rgb(73, 20, 114);
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid #eee;
-  margin: 15px 0;
+h4 {
+  text-align: center;
+  color: rgba(78, 11, 132, 0.536);
+  margin: 0;
 }
 
-b {
-  color: black;
-}
-
-p {
-  margin: 0 0 8px 0;
+p, ul {
   font-size: 14px;
   line-height: 24px;
+  margin: 0 0 8px;
   color: #999;
 }
 
 ul {
-  margin: 0 0 8px;
-  font-size: 14px;
-  line-height: 24px;
   list-style-type: circle;
   padding-left: 30px;
-  color: #999;
 }
 
-button {
-  background-color: rgb(77, 11, 132);
+b {
+  color: #3b3b3b;
+}
+
+hr {
   border: none;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
+  border-top: 1px solid #eee;
+  margin: 15px 0;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 10px 0;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  /* Border for each cell */
-  padding: 8px;
-  text-align: center;
-  min-width: 45px;
-}
-
-tr {
-  display: table-row;
-  vertical-align: inherit;
-  unicode-bidi: isolate;
-  border-color: inherit;
-}
-
+/* Footer */
 footer {
   color: white;
   text-align: center;
@@ -144,11 +87,154 @@ footer a {
   text-decoration: none;
 }
 
+
+/* ========== FORM ELEMENTS ========== */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+select, input {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+select {
+  padding: 5px;
+}
+
+input {
+  padding: 1px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+/* ========== BUTTONS ========== */
+button, .navbar-button, .navbar-button-2 {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button {
+  background-color: rgb(77, 11, 132);
+  color: white;
+  margin-top: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.navbar-button {
+  background-color: rgba(78, 11, 132, 0.7);
+  color: white;
+}
+
+.navbar-button-2 {
+  background-color: rgba(229, 222, 234, 0.5);
+  color: rgba(78, 11, 132);
+}
+
+.navbar-button:hover {
+  background-color: rgba(78, 11, 132);
+}
+
+.navbar-button-2:hover {
+  background-color: rgba(229, 222, 234);
+}
+
 .collapse-btn {
   background-color: rgba(29, 85, 34, 0.7);
   font-size: 16px;
 }
 
+.life_theme_item_collapse_btn {
+  background-color: rgba(13, 22, 117, 0.7);
+  font-size: 16px;
+} 
+
+.auth-button {
+  max-width: 200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-button {
+  margin: 10px;
+}
+
+/* ========== NAVIGATION ========== */
+.navbar-default {
+  background-color: #fff;
+  border-bottom: 1px solid #e7e7e7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-left {
+  margin-right: auto;
+}
+
+.navbar-title {
+  margin: 0;
+}
+
+.navbar-text {
+  margin: 0;
+  bottom: 0;
+}
+
+.navbar-right, .navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+
+  .navbar-button, .navbar-button-2 {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+
+/* ========== COMPONENTS ========== */
+/* Main Content */
+.main-content {
+  margin-top: 60px;
+  padding-top: 20px;
+}
+
+/* FAQ Background */
 .background {
   text-align: left;
   padding: 5px;
@@ -158,17 +244,9 @@ footer a {
   margin-right: auto;
 }
 
-.background h4 {
-  text-align: center;
-  color: rgba(78, 11, 132, 0.536);
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
+/* Info Collector */
 .info_collector {
-  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
   height: calc(100% - 10px);
-  /* Subtracting 40px from the viewport height */
   max-width: min(80vw, 1200px);
   min-width: 60vw;
   margin: 0 auto;
@@ -179,28 +257,16 @@ footer a {
   text-align: center;
 }
 
-.info_collector_header {
+.info_collector_header, .birth-time-row, .birth-location-row {
   align-items: center;
 }
 
-.birth-time-row {
-  align-items: center;
-}
-
-.birth-location-row {
-  align-items: center;
-}
-
-.birth-time-row select {
+.birth-time-row select, .birth-location-row select {
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 5px
 }
 
-.birth-location-row select {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
+/* Report Result */
 .result {
   margin-top: 20px;
   text-align: left;
@@ -210,267 +276,65 @@ footer a {
   margin-right: auto;
 }
 
-.report_item {
-  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
+/* Report Text Item */
+.report_item, .user-profile-item, .life_theme_item {
   height: calc(100% - 10px);
-  /* Subtracting 40px from the viewport height */
-  margin: 0 auto;
   padding: 20px;
-  box-sizing: border-box;
   background-color: rgba(222, 234, 223, 0.2);
   border-radius: 8px;
-  overflow: hidden;
-  /* Ensures hidden content does not affect layout */
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-  /* Smooth transition for collapse */
-}
-
-.report_item h2 {
-  display: flex;
-  justify-content: space-between;
-  /* Positions text on left and button on right */
-  align-items: center;
-  /* Vertically centers the text and button */
-  margin: 0;
-  /* Remove default margin from h2 */
-  padding: 0;
-  /* Adjust if needed */
-}
-
-.report_item_summary {
-  display: flex;
-  flex-direction: column;
-  margin: 5px auto;
-  padding: 10px 10px 5px 10px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  background-color: rgba(222, 234, 223, 0.7);
-}
-
-.report_item_summary p {
-  color: #818181;
-}
-
-.content {
-  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
-}
-
-.content.hidden {
-  opacity: 0;
-  height: 0;
   overflow: hidden;
-  padding: 0;
 }
 
-.planet_focialier_result_table th {
-  background-color: rgba(222, 234, 223, 0.7);
-  color: #818181;
-}
-
-.focalizer_pattern_row {
-  overflow-x: auto;
-  /* Enable horizontal scrolling */
-  text-align: left;
-}
-
-.calculation_result {
-  width: calc(100% - 10px);
-  /* Subtracting 40px from the viewport width */
-  height: calc(100% - 10px);
-  /* Subtracting 40px from the viewport height */
-  max-width: 800px;
+.report_item {
   margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #99999900;
-  border-radius: 8px;
-}
-
-.error {
-  color: rgb(220, 26, 26);
-  text-align: center;
-}
-
-.auth-button {
-  max-width: 200px;
-  /* Maximum button width */
-  width: 100%;
-  /* Scale to fit parent while respecting max-width */
-  box-sizing: border-box;
-  /* Includes padding in width calculations */
-}
-
-.navbar-default {
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-width: 0 0 1px;
-  border-color: #e7e7e7;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 56px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  /* Add some padding */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow for depth */
-}
-
-.navbar-left {
-  margin-right: auto;
-  /* Push the right section away */
-}
-
-.navbar-title {
-  margin: 0;
-}
-
-.no-underline {
-  text-decoration: none;
-}
-
-.navbar-right {
-  display: flex;
-  gap: 15px;
-}
-
-.navbar-text {
-  margin: 0;
-  bottom: 0;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 15px;
-}
-
-.navbar-button {
-  background-color: rgba(78, 11, 132, 0.7);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-/* Hover effect for buttons */
-.navbar-button:hover {
-  background-color: rgba(78, 11, 132);
-}
-
-.navbar-button-2 {
-  color: rgba(78, 11, 132);
-  background-color: rgba(229, 222, 234, 0.5);
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-/* Hover effect for buttons */
-.navbar-button-2:hover {
-  background-color: rgba(229, 222, 234);
-}
-
-/* Responsive: Adjust padding for smaller screens */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 10px 15px;
-  }
-
-  .navbar-title {
-    font-size: 1.2rem;
-  }
-
-  .navbar-button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-  
-  .navbar-button-2 {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-}
-
-.main-content {
-  margin-top: 60px;
-  padding-top: 20px;
 }
 
 .user-profile-item {
-  height: calc(100% - 10px);
   margin: 0 auto 20px auto;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: rgba(222, 234, 223, 0.2);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   text-align: center;
+}
+
+.life_theme_item {
+  margin: 0 auto 10px auto;
+  box-sizing: border-box;
+}
+
+.report_item h2, .life_theme_item h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .user-profile-item p {
   margin: 5px 0 0 0;
 }
 
-.profile-button {
-  margin: 10px 10px 10px 10px;
-}
-
-.life_theme_item {
-  /* width: calc(100% - 10px); /* Subtracting 40px from the viewport width */
-  height: calc(100% - 10px);
-  /* Subtracting 40px from the viewport height */
-  margin: 0 auto 10px auto;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: rgba(222, 223, 234, 0.2);
-  border-radius: 8px;
-  overflow: hidden;
-  /* Ensures hidden content does not affect layout */
-  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-  /* Smooth transition for collapse */
-}
-
-.life_theme_item h2 {
-  display: flex;
-  justify-content: space-between;
-  /* Positions text on left and button on right */
-  align-items: center;
-  /* Vertically centers the text and button */
-  margin: 0;
-  /* Remove default margin from h2 */
-  padding: 0;
-  /* Adjust if needed */
-}
-
-.life_theme_item_summary {
+.report_item_summary, .life_theme_item_summary, .natal-chart-item {
   display: flex;
   flex-direction: column;
   margin: 5px auto;
   padding: 10px 10px 5px 10px;
   box-sizing: border-box;
   border-radius: 6px;
-  background-color: rgba(222, 223, 234, 0.7);
+}
+
+.report_item_summary {
+  background-color: rgba(222, 234, 223, 0.7);
+}
+
+.life_theme_item_summary {
+  background-color: #dedfeab3;
+}
+
+
+.report_item_summary p {
+  color: #818181;
 }
 
 .life_theme_item_summary p {
   color: #818181;
   text-align: left;
-}
-
-.life_theme_item_collapse_btn {
-  background-color: rgba(13, 22, 117, 0.7);
-  font-size: 16px;
 }
 
 .life_theme_item_detail h3 {
@@ -483,38 +347,53 @@ footer a {
   text-align: left;
 }
 
-.natal-chart-item {
-  display: flex;
-  flex-direction: column;
-  margin: 5px auto;
-  padding: 10px 10px 5px 10px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  /*background-color: rgba(222, 223, 234, 0.7);*/
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  min-width: 45px;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  unicode-bidi: isolate;
+  border-color: inherit;
+}
+
+.planet_focialier_result_table th {
+  background-color: rgba(222, 234, 223, 0.7);
+  color: #818181;
+}
+
+.focalizer_pattern_row {
+  overflow-x: auto;
+  text-align: left;
+}
+
+.natal-chart-table td, .natal-chart-table th {
+  padding: 0;
+  margin: 5px 0;
+  min-width: 30px;
 }
 
 .natal-chart-table th {
   background-color: rgba(222, 234, 223, 0.7);
   color: #818181;
-  padding: 0;
-  margin: 5px 0;
-  min-width: 30px;
 }
 
-.natal-chart-table td {
-  padding: 0;
-  margin: 5px 0;
-  min-width: 30px;
-}
-
-.natal-chart-table td p {
+.natal-chart-table td p, .natal-chart-table th p {
   margin: 3px 0;
 }
 
-.natal-chart-table th p {
-  margin: 3px 0;
-}
-
+/* ========== Terms of Service / Privacy Notice / Feedback =========== */
 .term-item {
   text-align: left;
   margin: 10px auto 10px auto;
@@ -533,4 +412,21 @@ footer a {
   word-wrap: break-word;    /* Allow long words to break and wrap */
   box-sizing: border-box;   /* Ensures padding and border are included in width/height */
   resize: none;             /* Optional: to disable resizing */
+}
+
+/* ========== UTILITIES ========== */
+.hidden {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.error {
+  color: rgb(220, 26, 26);
+  text-align: center;
 }

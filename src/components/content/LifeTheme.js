@@ -132,7 +132,7 @@ const LifeThemeReading = () => {
           {loading && (
             <p textAlign="center">
               正在努力生成专属于{profile.name}
-              的个性化解读，可能需要几分钟的时间，<b>请勿刷新页面</b>
+              的个性化解读，第一次可能需要几分钟的时间，<b>请勿刷新页面</b>
               。谢谢你的耐心等待！
             </p>
           )}
