@@ -157,7 +157,7 @@ const ProfileOverview = () => {
                 查看档案
               </button>
               <button
-                name="profile-button"
+                className="profile-button-2"
                 onClick={() => deleteProfile(profile.id, errors)}
                 disabled={isDeleteDisabled[profile.id]}
               >

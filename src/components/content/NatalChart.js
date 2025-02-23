@@ -25,26 +25,29 @@ const NatalChat = () => {
     const fetchNatalChart = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://astro-notebook.onrender.com/natal-chart", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user_id: localStorage.getItem("user_id"),
-            name: profile.name,
-            year: profile.year,
-            month: profile.month,
-            day: profile.day,
-            hour: profile.hour,
-            minute: profile.minute,
-            lng: profile.lng,
-            lat: profile.lat,
-            tz: profile.tz,
-          }),
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://astro-notebook.onrender.com/natal-chart",
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: localStorage.getItem("user_id"),
+              name: profile.name,
+              year: profile.year,
+              month: profile.month,
+              day: profile.day,
+              hour: profile.hour,
+              minute: profile.minute,
+              lng: profile.lng,
+              lat: profile.lat,
+              tz: profile.tz,
+            }),
+            credentials: "include",
+          }
+        );
 
         if (response.status === 200) {
           const data = await response.json();
@@ -99,43 +102,42 @@ const NatalChat = () => {
       <NavBar />
       <div className="main-content">
         <h1>档案详情</h1>
-        <div className="result">
-          <div className="user-profile-item" key="TODO">
-            <h3>{profile.name}</h3>
-            <p>
-              <b>出生时间：</b>
-              {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
-              {profile.minute}分
-            </p>
-            <p>
-              <b>出生地点：</b>
-              {profile.location}
-            </p>
-            <p>
-              <b>经纬度：</b>
-              {convertToCardinal(profile.lat, profile.lng)}
-            </p>
-            <p>
-              <b>宫位制：</b>普拉西度 Placidus
-            </p>
-            <button
-              className="profile-button"
-              onClick={() =>
-                navigate("/life-theme?id=" + profile.id, {
-                  state: { profile },
-                })
-              }
-            >
-              人生主题解读
-            </button>
+        <div className="user-profile-item">
+          <h3>{profile.name}</h3>
+          <p>
+            <b>出生时间：</b>
+            {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
+            {profile.minute}分
+          </p>
+          <p>
+            <b>出生地点：</b>
+            {profile.location}
+          </p>
+          <p>
+            <b>经纬度：</b>
+            {convertToCardinal(profile.lat, profile.lng)}
+          </p>
+          <p>
+            <b>宫位制：</b>普拉西度 Placidus
+          </p>
+          <button
+            className="profile-button"
+            onClick={() =>
+              navigate("/life-theme?id=" + profile.id, {
+                state: { profile },
+              })
+            }
+          >
+            人生主题解读
+          </button>
+        </div>
+        {loading && (
+          <div>
+            <p>正在努力获取星盘，请稍后。。。</p>
           </div>
-          {loading && (
-            <div>
-              <p textAlign="center">正在努力获取星盘，请稍后。。。</p>
-            </div>
-          )}
-          {error}
-
+        )}
+        {error}
+        <div className="result">
           {result && (
             <>
               <div className="natal-chart-item">
@@ -266,14 +268,10 @@ const NatalChat = () => {
               </div>
             </>
           )}
-
         </div>
-        <button
-            className="profile-button"
-            onClick={() => navigate("/profile")}
-          >
-            返回我的档案
-          </button>
+        <button className="profile-button" onClick={() => navigate("/profile")}>
+          返回我的档案
+        </button>
       </div>
       <Footer />
     </div>

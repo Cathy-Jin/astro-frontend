@@ -116,46 +116,46 @@ const LifeThemeReading = () => {
       <NavBar />
       <div className="main-content">
         <h1>人生主题解读（仅供参考）</h1>
-        <div className="result">
-          <div className="user-profile-item" key={profile.id}>
-            <h3>{profile.name}</h3>
-            <p>
-              <b>出生时间：</b>
-              {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
-              {profile.minute}分
-            </p>
-            <p>
-              <b>出生地点：</b>
-              {profile.location}
-            </p>
-          </div>
-          {loading && (
-            <p textAlign="center">
-              正在努力生成专属于{profile.name}
-              的个性化解读，第一次可能需要几分钟的时间，<b>请勿刷新页面</b>
-              。谢谢你的耐心等待！
-            </p>
-          )}
-          {rateLimiting && (
-            <div className="error">请勿频繁刷新页面。10秒后再试哦~</div>
-          )}
-          {error}
+        <div className="user-profile-item" key={profile.id}>
+          <h3>{profile.name}</h3>
+          <p>
+            <b>出生时间：</b>
+            {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
+            {profile.minute}分
+          </p>
+          <p>
+            <b>出生地点：</b>
+            {profile.location}
+          </p>
         </div>
+        {loading && (
+          <p textAlign="center">
+            正在努力生成专属于{profile.name}
+            的个性化解读，第一次可能需要几分钟的时间，<b>请勿刷新页面</b>
+            。谢谢你的耐心等待！
+          </p>
+        )}
+        {rateLimiting && (
+          <div className="error">请勿频繁刷新页面。10秒后再试哦~</div>
+        )}
+        {error}
 
-        {reading.life_themes?.map((life_theme, index) => (
-          <LifeThemeItemReading key={index} life_theme={life_theme} />
-        ))}
-
+        <div className="result">
+          {reading.life_themes?.map((life_theme, index) => (
+            <LifeThemeItemReading key={index} life_theme={life_theme} />
+          ))}
+        </div>
+        
         <button
-          className="profile-button"
-          onClick={() =>
-            navigate("/profile-detail?id=" + profile.id, {
-              state: { profile },
-            })
-          }
-        >
-          返回档案详情
-        </button>
+            className="profile-button"
+            onClick={() =>
+              navigate("/profile-detail?id=" + profile.id, {
+                state: { profile },
+              })
+            }
+          >
+            返回档案详情
+          </button>
       </div>
       <Footer />
     </div>
