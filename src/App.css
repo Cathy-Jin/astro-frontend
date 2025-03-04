@@ -396,6 +396,39 @@ tr {
   margin: 3px 0;
 }
 
+
+/* Tabs */
+.natal-chart-tablist {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.natal-chart-tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.natal-chart-tab:hover {
+  color: rgb(67, 10, 114, 0.7);
+  font-weight: bold;
+  background-color: #eeeeee;
+}
+
+.natal-chart-tab--selected {
+  background: #fff;
+  border-color: #aaa;
+  color: rgb(67, 10, 114);
+  border-radius: 5px 5px 0 0;
+  font-weight: bold;
+}
+
 /* ========== Terms of Service / Privacy Notice / Feedback =========== */
 .term-item {
   text-align: left;
