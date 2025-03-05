@@ -491,6 +491,10 @@ function renderPlanetaryFocalizers(
           <div className="report_item_summary">
             <p>
               重点行星是本命盘中能量强大的行星，对全局有较为突出的影响。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
+              <br /><b>
+                更多详情，请<Link to="/signup">注册</Link>
+                并创建你的档案。
+              </b>
             </p>
           </div>
           <div>
@@ -510,23 +514,6 @@ function renderFocalizersContent(focalizers) {
     <>
       <hr />
       <h3>重点行星：{concatenatePlanetNames(domPlanets)}</h3>
-      <p>
-        <b>解读（仅供参考，需要结合星盘全局分析）</b>：
-        {domPlanets.length === 1 ? (
-          <>
-            <br />
-            {domPlanets[0].interpretation_cn}
-          </>
-        ) : (
-          <ul>
-            {domPlanets.map((planet) => (
-              <li key={planet.id}>{planet.interpretation_cn}</li>
-            ))}
-          </ul>
-        )}
-      </p>
-      <hr />
-      <h3>得分详情</h3>
       <p>
         <table className="planet_focialier_result_table">
           <thead>
@@ -558,7 +545,7 @@ function concatenatePlanetNames(domPlanets) {
   if (domPlanets.length === 1) {
     return domPlanets[0].name_cn;
   } else {
-    return domPlanets.map((item) => item.name_cn).join("、 ");
+    return domPlanets.map((item) => item.name_cn).join("、");
   }
 }
 

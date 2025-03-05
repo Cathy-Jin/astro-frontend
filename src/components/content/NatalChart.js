@@ -103,7 +103,6 @@ const NatalChat = () => {
     <div className="natal-chart">
       <NavBar />
       <div className="main-content">
-        <h1>档案详情</h1>
         <div className="user-profile-item">
           <h3>{profile.name}</h3>
           <p>

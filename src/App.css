@@ -1,7 +1,21 @@
 /* ========== GLOBAL STYLES ========== */
+@font-face {
+  font-family: 'ChillJinshuSongRegular';
+  src: url('fonts/ChillJinshuSongRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceHanSansSC";
+  src: url("fonts/SourceHanSansSC-VF.otf.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
     "WenQuanYi Micro Hei", sans-serif;
   display: flex;
   justify-content: center;
@@ -14,8 +28,8 @@ body {
 
 .App {
   text-align: center;
-  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
     "WenQuanYi Micro Hei", sans-serif;
 }
 
@@ -28,6 +42,7 @@ h2, h3, h4 {
 h1 {
   font-size: 36px;
   color: rgb(67, 10, 114);
+  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 h2 {
@@ -110,6 +125,9 @@ select {
 
 input {
   padding: 1px;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
+    "WenQuanYi Micro Hei", sans-serif;
 }
 
 label {
@@ -120,19 +138,26 @@ label {
 
 /* ========== BUTTONS ========== */
 button, .navbar-button, .navbar-button-2 {
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC",
+    "WenQuanYi Micro Hei", sans-serif;
   border: none;
   border-radius: 5px;
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 0 16px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  height: 32px;
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+  white-space: nowrap;
 }
 
 button {
   background-color: rgb(77, 11, 132, 0.7);
   color: white;
   margin-top: 10px;
-  padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -152,14 +177,19 @@ button:hover {
   background-color: rgba(229, 222, 234);
 }
 
+.collapse-btn, .life_theme_item_collapse_btn {
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 32px;
+  padding: 0 8px;
+}
+
 .collapse-btn {
   background-color: rgba(29, 85, 34, 0.7);
-  font-size: 16px;
 }
 
 .life_theme_item_collapse_btn {
   background-color: rgba(13, 22, 117, 0.7);
-  font-size: 16px;
 } 
 
 .collapse-btn:hover {
@@ -289,6 +319,10 @@ button:hover {
   overflow: hidden;
 }
 
+.life_theme_item {
+  background-color: rgba(222, 223, 234, 0.2);
+}
+
 .report_item {
   margin: 0 auto;
 }
@@ -307,6 +341,14 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.report_item h2 {
+  color: rgba(29, 85, 34);
+}
+
+.life_theme_item h2 {
+  color: rgb(13, 22, 117);
 }
 
 .user-profile-item p {
@@ -329,7 +371,6 @@ button:hover {
 .life_theme_item_summary {
   background-color: #dedfeab3;
 }
-
 
 .report_item_summary p {
   color: #818181;
