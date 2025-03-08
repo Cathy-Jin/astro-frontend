@@ -1,4 +1,7 @@
-/* ========== GLOBAL STYLES ========== */
+:root {
+  /* https://www.schemecolor.com/smoky-purples.php */
+}
+
 @font-face {
   font-family: 'ChillJinshuSongRegular';
   src: url('fonts/ChillJinshuSongRegular.woff') format('woff');
@@ -12,6 +15,8 @@
   font-weight: normal;
   font-style: normal;
 }
+
+/* ========== GLOBAL STYLES ========== */
 
 body {
   font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
@@ -49,6 +54,7 @@ h2 {
   font-size: 24px;
   margin-bottom: 3px;
   color: rgb(70, 15, 114);
+  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 h3 {
@@ -58,6 +64,7 @@ h3 {
   margin: -7px 0 2px 0;
   display: inherit;
   color: rgb(73, 20, 114);
+  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 h4 {
@@ -138,7 +145,7 @@ label {
 
 /* ========== BUTTONS ========== */
 button, .navbar-button, .navbar-button-2 {
-  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
+  font-family: "SourceHanSansSC", "Microsoft YaHei", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
     "Hiragino Sans GB", "Noto Sans SC", "PingFang SC",
     "WenQuanYi Micro Hei", sans-serif;
   border: none;
@@ -208,6 +215,21 @@ button:hover {
 
 .profile-button, .profile-button-2 {
   margin: 10px;
+}
+
+.deletion-button {
+  background-color: transparent;
+  margin: 10px;
+  padding: 0, 8px;
+}
+
+.deletion-button:hover {
+  background-color: rgba(229, 222, 234);
+}
+
+.deletion-button-image {
+  width: 16px;
+  height: auto;
 }
 
 /* ========== NAVIGATION ========== */
@@ -280,7 +302,7 @@ button:hover {
 /* Info Collector */
 .info_collector {
   height: calc(100% - 10px);
-  max-width: min(80vw, 1200px);
+  max-width: min(90vw, 1200px);
   min-width: 60vw;
   margin: 0 auto;
   padding: 20px;
@@ -303,17 +325,20 @@ button:hover {
 .result {
   margin-top: 20px;
   text-align: left;
-  max-width: min(80vw, 1200px);
-  min-width: 60vw;
+  max-width: min(90vw, 1200px);
+  /* min-width: 60vw; */
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
 }
 
 /* Report Text Item */
-.report_item, .user-profile-item, .life_theme_item {
-  height: calc(100% - 10px);
+.report_item, .user-profile-item, .user-profile-item-dash, .user-profile-expansion-item, .life_theme_item {
   padding: 20px;
-  background-color: rgba(222, 234, 223, 0.2);
   border-radius: 8px;
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   overflow: hidden;
@@ -321,15 +346,93 @@ button:hover {
 
 .life_theme_item {
   background-color: rgba(222, 223, 234, 0.2);
+  height: calc(100% - 10px);
 }
 
 .report_item {
   margin: 0 auto;
+  height: calc(100% - 10px);
+  background-color: rgba(222, 234, 223, 0.2);
+  max-width: min(90vw, 1200px);
+  min-width: 60vw;
 }
 
-.user-profile-item {
-  margin: 0 auto 20px auto;
+.user-profile-expansion-item {
+  margin: 10px;
+  width: min(85vw, 1200px);
+  background-color: rgba(222, 234, 223, 0.2);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-profile-item, .user-profile-item-dash {
+  margin: 10px;
   text-align: center;
+  width: min(90vw, 400px);
+  height: 145px;
+  background-color: rgba(222, 234, 223, 0.2);
+}
+
+.user-profile-item-dash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: transparent;
+  border: 1px dotted #999; */
+}
+
+.user-profile-item h2, .user-profile-expansion-item h2 {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; 
+  width: 100%; 
+  flex-wrap: wrap;
+}
+
+.user-profile-item p, .user-profile-expansion-item p {
+  text-align: left;
+  margin: 0;
+}
+
+.user-profile-details-container, .user-profile-expansion-details-container {
+  display: flex;
+  align-items: last baseline;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.user-profile-details h1 {
+  text-align: left;
+  margin: 20px 0 10px 0;
+}
+
+.user-profile-tag-zodiac, .user-profile-tag-planet {
+  font-size: 12px;
+  margin: 5px;
+  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  border-radius: 4px;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  background-color: rgba(29, 85, 34, 0.7);
+  color: white;
+  font-weight: lighter;
+  /*border: 2px solid #4A90E2;  Border color */
+  padding: 4px 8px; /* Add some spacing inside */
+  display: inline-block; /* Ensures proper spacing */
+}
+
+.user-profile-tag-zodiac {
+  background-color: rgba(29, 85, 34, 0.7);
+}
+
+.user-profile-tag-planet {
+  background-color:rgb(13, 22, 117, 0.7);
 }
 
 .life_theme_item {
@@ -340,7 +443,7 @@ button:hover {
 .report_item h2, .life_theme_item h2 {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .report_item h2 {
@@ -351,10 +454,6 @@ button:hover {
   color: rgb(13, 22, 117);
 }
 
-.user-profile-item p {
-  margin: 5px 0 0 0;
-}
-
 .report_item_summary, .life_theme_item_summary, .natal-chart-item {
   display: flex;
   flex-direction: column;
@@ -362,6 +461,19 @@ button:hover {
   padding: 10px 10px 5px 10px;
   box-sizing: border-box;
   border-radius: 6px;
+}
+
+.natal-chart-item {
+  width: min(90vw, 500px);
+}
+
+.natal-chart-item-container {
+  max-width: min(90vw, 1200px);
+  min-width: 60vw;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .report_item_summary {
@@ -454,6 +566,7 @@ tr {
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
+  font-family:"SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 .natal-chart-tab:hover {
@@ -468,6 +581,7 @@ tr {
   color: rgb(67, 10, 114);
   border-radius: 5px 5px 0 0;
   font-weight: bold;
+  font-family:"SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 /* ========== Terms of Service / Privacy Notice / Feedback =========== */

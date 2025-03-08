@@ -7,9 +7,12 @@ import {
 } from "react-router-dom";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
+import CircleGraph from "./LifeThemeDiagram";
+import { toTwoDigits, convertToCardinal } from "../Util";
 
 const LifeThemeReading = () => {
   const [loading, setLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [rateLimiting, setRateLimiting] = useState(false);
   const [error, setError] = useState("");
   const [reading, setReading] = useState({});
@@ -20,6 +23,9 @@ const LifeThemeReading = () => {
   const profile = location.state?.profile; // Get from router state
 
   const navigate = useNavigate();
+  const toggleExpand = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
 
   const RATE_LIMIT_MS = 5000; // 5 seconds
 
@@ -115,18 +121,50 @@ const LifeThemeReading = () => {
     <div className="life-theme-reading">
       <NavBar />
       <div className="main-content">
-        <h1>人生主题解读（仅供参考）</h1>
-        <div className="user-profile-item" key={profile.id}>
-          <h3>{profile.name}</h3>
-          <p>
-            <b>出生时间：</b>
-            {profile.year}年{profile.month}月{profile.day}日{profile.hour}时
-            {profile.minute}分
-          </p>
-          <p>
-            <b>出生地点：</b>
-            {profile.location}
-          </p>
+        <div className="user-profile-expansion-item" key={profile.id}>
+          <div className="user-profile-expansion-details-container">
+            <div className="user-profile-details">
+              <h2>{profile.name}</h2>
+              <p>
+                {profile.year}-{toTwoDigits(profile.month)}-
+                {toTwoDigits(profile.day)} {toTwoDigits(profile.hour)}:
+                {toTwoDigits(profile.minute)}
+              </p>
+              <p>{profile.location}</p>
+              <p>{convertToCardinal(profile.lat, profile.lng)}</p>
+              <p>Placidus宫位制</p>
+              <h1>人生主题</h1>
+              <p
+                onClick={toggleExpand}
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+              >
+                什么是人生主题？
+              </p>
+              {isExpanded && (
+                <>
+                  <p>
+                    在占星学中，星盘以星座、宫位、行星三大元素构成。这三者互相交织，形成了独特的占星符号体系。
+                  </p>
+                  <p>
+                    “人生主题”指在本命盘中，某些特定的占星规则以三种或多种形式出现时所形成的强大动力。
+                  </p>
+                  <p>
+                    比如，土星落在天秤座、金星落在摩羯座、或者七宫与十宫之间的相位互动，这些都构成了7-10这一人生主题。
+                  </p>
+                  <p>
+                    <b>
+                      每个人的人生主题不尽相同，数量多少也并无好坏之分，大家都是独特的自己。
+                    </b>
+                  </p>
+                </>
+              )}
+            </div>
+            {reading && (
+              <CircleGraph
+                relationships={getRelationships(reading.life_themes)}
+              />
+            )}
+          </div>
         </div>
         {loading && (
           <p textAlign="center">
@@ -141,26 +179,42 @@ const LifeThemeReading = () => {
         {error}
 
         <div className="result">
+          <p><b>解读按人生主题能量从高到低排序，内容仅供参考。</b></p>
           {reading.life_themes?.map((life_theme, index) => (
             <LifeThemeItemReading key={index} life_theme={life_theme} />
           ))}
         </div>
-        
+
         <button
-            className="profile-button"
-            onClick={() =>
-              navigate("/profile-detail?id=" + profile.id, {
-                state: { profile },
-              })
-            }
-          >
-            返回档案详情
-          </button>
+          className="profile-button"
+          onClick={() =>
+            navigate("/profile-detail?id=" + profile.id, {
+              state: { profile },
+            })
+          }
+        >
+          返回档案详情
+        </button>
       </div>
       <Footer />
     </div>
   );
 };
+
+function getRelationships(life_themes) {
+  const relationships = [];
+  life_themes?.map((item) => {
+    const matches = item.theme.match(/\d+/g);
+    if (matches) {
+      if (matches.length === 1) {
+        relationships.push([parseInt(matches[0]), parseInt(matches[0])]);
+      } else {
+        relationships.push([parseInt(matches[0]), parseInt(matches[1])]);
+      }
+    }
+  }); 
+  return relationships;
+}
 
 function LifeThemeItemReading({ life_theme }) {
   const [isOpen, setIsOpen] = useState(false);
