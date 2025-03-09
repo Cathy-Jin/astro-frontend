@@ -382,7 +382,7 @@ function renderThemes(
           <div className="report_item_summary">
             <p>
               <b>
-                如果你需要更细致更个性化的解读，请<Link to="/signup">注册</Link>
+                如果你需要更细致更个性化的解读，请<Link to="/signin">登录</Link>或<Link to="/signup">注册</Link>
                 并创建你的档案。
               </b>
             </p>
@@ -492,7 +492,7 @@ function renderPlanetaryFocalizers(
             <p>
               重点行星是本命盘中能量强大的行星，对全局有较为突出的影响。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
               <br /><b>
-                更多详情，请<Link to="/signup">注册</Link>
+                更多详情，请<Link to="/signin">登录</Link>或<Link to="/signup">注册</Link>
                 并创建你的档案。
               </b>
             </p>

@@ -59,43 +59,57 @@ const Signin = () => {
   };
 
   return (
-    <div>
-      <h2>用户登录</h2>
-      <form className="auth-form" onSubmit={handleLogin}>
-        <div className="auth-row">
-          <p>
-            {error}
-            <br />
-            邮箱：
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <br />
-            密码：
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <br />
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            记住我
-            <br />
-            <Link to="/forget-password">忘记密码？</Link>
-          </p>
+    <div className="signin">
+      <div className="main-content">
+        <Link to="/" className="no-underline">
+          <h1 className="navbar-title">星迹档案</h1>
+        </Link>
+        <br />
+        <br />
+        <div className="info_collector">
+          
+          <form className="auth-form" onSubmit={handleLogin}>
+          <h2>欢迎登录</h2>
+            <div className="auth-row">
+              <p>
+                {error}
+                邮箱：
+                <br />
+                <input
+                  className="auth-input"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <br />
+                密码：
+                <br />
+                <input
+                  className="auth-input"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <br />
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span>记住我</span>
+                <span style={{ float: "right" }}>
+                  <Link to="/forget-password">忘记密码？</Link>
+                </span>
+              </p>
+            </div>
+            <button className="auth-button" type="submit" disabled={isDisabled}>
+              {isDisabled ? "正在登录……" : "登录"}
+            </button>
+          </form>
         </div>
-        <button className="auth-button" type="submit" disabled={isDisabled}>
-          {isDisabled ? "正在登录……" : "登录"}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

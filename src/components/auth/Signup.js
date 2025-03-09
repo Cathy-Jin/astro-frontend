@@ -61,45 +61,69 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>用户注册</h2>
-      <form className="auth-form" onSubmit={handleSignUp}>
-        <div className="auth-row">
-          <p>
-            {error}
-            <br />
-            &ensp;&ensp;&ensp;&ensp;邮箱：
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <br />
-            &ensp;&ensp;&ensp;&ensp;密码：
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <br />
-            确认密码：
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </p>
+    <div className="signup">
+      <div className="main-content">
+        <Link to="/" className="no-underline">
+          <h1 className="navbar-title">星迹档案</h1>
+        </Link>
+        <br />
+        <br />
+        <div className="info_collector">
+          <form className="auth-form" onSubmit={handleSignUp}>
+            <h2>欢迎注册</h2>
+            <div className="auth-row">
+              <p>
+                {error}
+                邮箱：
+                <br />
+                <input
+                  className="auth-input"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <br />
+                密码：
+                <br />
+                <input
+                  className="auth-input"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <br />
+                确认密码：
+                <br />
+                <input
+                  className="auth-input"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </p>
+            </div>
+            <div>
+              <p>
+                注册即表示您同意我们的
+                <Link to="/terms-of-service">服务条款</Link>及
+                <Link to="/privacy-policy">隐私政策</Link>。
+              </p>
+              <button
+                className="auth-button"
+                type="submit"
+                disabled={isDisabled}
+              >
+                {isDisabled ? "正在注册……" : "注册"}
+              </button>
+            </div>
+          </form>
+          <br />
+          {success}
         </div>
-        <p>点击“注册”即表示您同意我们的<Link to="/terms-of-service">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
-        <button className="auth-button" type="submit" disabled={isDisabled}>
-          {isDisabled ? "正在注册……" : "注册"}
-        </button>
-      </form>
-      <br />
-      {success}
+      </div>
     </div>
   );
 };

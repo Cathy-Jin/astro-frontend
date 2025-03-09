@@ -78,36 +78,48 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      <h2>重置密码</h2>
-      <form className="auth-form" onSubmit={handlePasswordReset}>
-        <div className="auth-row">
-          <p>
-            {error}
-            <br />
-            新的密码：
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <br />
-            确认密码：
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </p>
+    <div className="reset-password">
+      <div className="main-content">
+        <Link to="/" className="no-underline">
+          <h1 className="navbar-title">星迹档案</h1>
+        </Link>
+        <br />
+        <br />
+        <div className="info_collector">
+          <form className="auth-form" onSubmit={handlePasswordReset}>
+            <h2>重置密码</h2>
+            <div className="auth-row">
+              <p>
+                {error}
+                新的密码：
+                <br />
+                <input
+                  className="auth-input"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <br />
+                确认密码：
+                <br />
+                <input
+                  className="auth-input"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </p>
+            </div>
+            <button className="auth-button" type="submit" disabled={isDisabled}>
+              {isDisabled ? "正在重置……" : "重置密码"}
+            </button>
+          </form>
+          <br />
+          {success}
         </div>
-        <button className="auth-button" type="submit" disabled={isDisabled}>
-          {isDisabled ? "正在重置……" : "重置密码"}
-        </button>
-      </form>
-      <br />
-      {success}
+      </div>
     </div>
   );
 };

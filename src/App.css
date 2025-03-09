@@ -143,6 +143,28 @@ label {
   margin: 10px;
 }
 
+.auth-form {
+  gap: 10px;
+}
+
+.auth-row {
+  text-align: left;
+}
+
+.auth-input {
+  border-radius: 8px;
+  border-width: 0.5;
+  width: min(75vw, 300px);
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-top: 4px;
+  padding: 2px 4px;
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #999;
+}
+
 /* ========== BUTTONS ========== */
 button, .navbar-button, .navbar-button-2 {
   font-family: "SourceHanSansSC", "Microsoft YaHei", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
@@ -254,6 +276,7 @@ button:hover {
 
 .navbar-title {
   margin: 0;
+  font-family: "ChillJinshuSongRegular", "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 .navbar-text {

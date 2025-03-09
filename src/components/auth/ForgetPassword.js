@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -41,28 +42,38 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div>
-      <h2>忘记密码？</h2>
-      <form className="auth-form" onSubmit={handleForgetPassword}>
-        <div className="auth-row">
-          <p>
-            {error}
-            <br />
-            邮箱：
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </p>
+    <div className="forget-password">
+      <div className="main-content">
+        <Link to="/" className="no-underline">
+          <h1 className="navbar-title">星迹档案</h1>
+        </Link>
+        <br />
+        <br />
+        <div className="info_collector">
+          <form className="auth-form" onSubmit={handleForgetPassword}>
+            <h2>忘记密码？</h2>
+            <div className="auth-row">
+              <p>
+                {error}
+                邮箱：
+                <br />
+                <input
+                  className="auth-input"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </p>
+            </div>
+            <button className="auth-button" type="submit" disabled={isDisabled}>
+              {isDisabled ? "正在验证……" : "验证邮箱"}
+            </button>
+          </form>
+          <br />
+          {message}
         </div>
-        <button className="auth-button" type="submit" disabled={isDisabled}>
-          {isDisabled ? "正在验证……" : "重置密码"}
-        </button>
-      </form>
-      <br />
-      {message}
+      </div>
     </div>
   );
 };
