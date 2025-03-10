@@ -72,21 +72,21 @@ const Feedback = () => {
       <div className="main-content">
         <h1>意见反馈</h1>
         <div className="info_collector">
-          <form onSubmit={handleSubmit}>
-            <div className="info_collector_header">
+          <form className="profile-form" onSubmit={handleSubmit}>
+            <div className="profile-row">
               <p><b>
                 欢迎在这里留下你的想法！
                 <br />
-                如果你愿意的话，也可以留个联系方式，方便我们和你聊聊～
+                如果你愿意的话也可以留个联系方式，方便我们和你聊聊～
                 <br />
-                我们不会把你的信息透露给第三方🔒
+                我们不会主动把你的信息透露给第三方🔒
                 <br /> 
-                如有疑问，欢迎发送邮件至<a href="mailto:astro.archive.contact@gmail.com">astro.archive.contact@gmail.com</a>联系我们。
-              </b></p>
+                如有疑问，欢迎发送邮件至<a href="mailto:astro.archive.contact@gmail.com">astro.archive.contact@gmail.com</a>。
+                </b></p>
             </div>
-            <div className="feedback-row">
+            <div className="profile-row">
               <p>
-                <b>留言 (500字以内)</b>
+                留言 （500字以内）
                 <br />
                 <textarea
                     className="textbox"
@@ -101,38 +101,38 @@ const Feedback = () => {
                 />
               </p>
             </div>
-            <div className="feedback-row">
+            <div className="profile-row">
               <p>
-                <b>邮箱（选填）</b>
+                邮箱（选填）
                 <br />
-                <input
+                <input className="profile-input"
                   type="text"
                   name="email"
-                  size="30"
                   placeholder="你的邮箱"
                   value={formData.email}
                   onChange={handleChange}
                 />
               </p>
             </div>
-            <div className="feedback-row">
+            <div className="profile-row">
               <p>
-                <b>微信（选填）</b>
+                微信（选填）
                 <br />
-                <input
+                <input className="profile-input"
                   type="text"
                   name="wechat"
-                  size="30"
                   placeholder="你的微信"
                   value={formData.wechat}
                   onChange={handleChange}
                 />
               </p>
             </div>
-            <p>点击“提交”即表示您理解并同意我们的<Link to="/terms-of-service">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
+            <div>
+            <p>提交即表示您理解并同意我们的<Link to="/terms-of-service">服务条款</Link>及<Link to="/privacy-policy">隐私政策</Link>。</p>
             <button type="submit" disabled={isDisabled}>
               {isDisabled? "提交中……" : "提交"}
             </button>
+            </div>
           </form>
           <br />
           {error}

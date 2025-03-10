@@ -123,9 +123,9 @@ const CreateProfile = () => {
               /></p>
             </div>
             <div className="profile-row">
-              <h3>出生时间</h3>
+              <h3><b>出生时间</b></h3>
               <p>
-                日期:
+                日期（必填）:
                 <br />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateField
@@ -134,19 +134,21 @@ const CreateProfile = () => {
                     value={date}
                     onChange={handleDateChange}
                     sx={{
-                      width: "105px",
+                      width: "120px",
                       margin: "4px 0",
                       "& .MuiOutlinedInput-root": {
                         borderRadius: "8px",
                         border: "0.5px solid #999",
                         boxShadow: "none",
                         outline: "none",
+                        backgroundColor: "#fff",
                       },
                       "& .MuiInputBase-input": {
                         fontSize: "14px",
                         fontFamily: "Microsoft YaHei, sans-serif",
                         textAlign: "center",
-                        padding: "2px 4px",
+                        padding: "2px 8px",
+                        background: "none"
                       },
                     }}
                   />
@@ -161,19 +163,20 @@ const CreateProfile = () => {
                     value={time}
                     onChange={handleTimeChange}
                     sx={{
-                      width: "60px",
+                      width: "80px",
                       margin: "4px 0",
                       "& .MuiOutlinedInput-root": {
                         borderRadius: "8px",
                         border: "0.5px solid #999",
                         boxShadow: "none",
                         outline: "none",
+                        backgroundColor: "#fff",
                       },
                       "& .MuiInputBase-input": {
                         fontSize: "14px",
                         fontFamily: "Microsoft YaHei, sans-serif",
                         textAlign: "center",
-                        padding: "2px 4px",
+                        padding: "2px 8px",
                       },
                     }}
                   />
@@ -183,7 +186,7 @@ const CreateProfile = () => {
               <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时 */}
             </div>
             <div className="profile-row">
-              <h3>出生地点</h3>
+              <h3><b>出生地点</b></h3>
               <p>
                 国家/地区：
                 <input className="profile-input"

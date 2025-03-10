@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField, TimeField } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 const Home = () => {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
@@ -10,8 +14,9 @@ const Home = () => {
   const [loading, setLoading] = useState(false); // Add loading state
   const [isDominantPlanetResultOpen, setIsDominantPlanetResultOpen] =
     useState(false);
-  const [isLifeThemeResultOpen, setIsLifeThemeResultOpen] =
-    useState(false);
+  const [isLifeThemeResultOpen, setIsLifeThemeResultOpen] = useState(false);
+  const [date, setDate] = useState(dayjs());
+  const [time, setTime] = useState(dayjs());
 
   const [formData, setFormData] = useState({
     year: "",
@@ -33,6 +38,29 @@ const Home = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDateChange = (date) => {
+    if (date) {
+      setDate(date);
+      setFormData((prevData) => ({
+        ...prevData,
+        year: date.year(),
+        month: date.month() + 1, // Month is 0-indexed in dayjs
+        day: date.date(),
+      }));
+    }
+  };
+
+  const handleTimeChange = (time) => {
+    if (time) {
+      setTime(time);
+      setFormData((prevData) => ({
+        ...prevData,
+        hour: time.hour(),
+        minute: time.minute(),
+      }));
+    }
   };
 
   const toggleDominantPlanetResultCollapse = () => {
@@ -99,25 +127,15 @@ const Home = () => {
           </h4>
           {isExpanded && (
             <p>
-              <b>什么是人生主题？</b>
-              <br />
-              相信许多占星爱好者都知道，星盘由三个基本元素组成：星座、宫位和行星。这三者的独特排列形成了占星学中的一种整体性，而每个元素都可以看作是占星符号的十二个规则的表现形式。这十二个规则之间的互动可以通过行星的位置、它们所在的宫位以及行星之间的相位（即相互关系）来体现。
-              <br />
-              举个例子，下述皆说明了7与10的交替作用：土星落在天秤座；土星落在七宫；金星落在魔羯座；金星落在十宫；金星与土星的所有相位；七宫所在行星与十宫所在行星的所有相位；以及天秤座所在行星与魔羯座所在行星的所有相位。
-              <br />
-              史蒂芬·阿若优（Stephen
-              Arroyo）在他的《生命的轨迹》中说道：“一个人的本命盘若是有某种类型的交替法则以三种或多种情况呈现出来，那么这股动力就会构成所谓的生命重要主题。”
-              <br />
-              <br />
               <b>如何使用这个网站？</b>
               <br />
-              如果你是一名现代占星爱好者，这个网站可以快速总结出占星规则之间的互动及其出现频率（由高到低），帮助你更轻松地解读星盘。
+              如果你是一名现代占星爱好者，这个网站可以快速排盘，并总结出重点行星与互动能量，帮助你更轻松地解读星盘。
               如果你对自我认知感兴趣，这个网站可以提供一个新的视角，帮助你更深入地理解自身的能量和潜能。
               <br />
               <br />
               <b>是否支持夏令时？</b>
               <br />
-              支持，且支持自动换算。
+              支持，且会自动换算，无需特别标注。
               <br />
               <br />
               <b>出生地如果在中国以外怎么办？</b>
@@ -125,7 +143,7 @@ const Home = () => {
               网站支持外国出生地查询，且支持英文。只需将国家/地区一栏的中国改成出生地的国家/地区即可。
               <br />
               <br />
-              <b>计算结果出现了好多主题，应该怎么看呢？</b>
+              <b>计算结果出现了好多人生主题，应该怎么看呢？</b>
               <br />
               计算结果是按照主题在星盘上出现的频率由高到低排的。理论上，出现频率越高的主题越重要。
               <br />
@@ -143,88 +161,79 @@ const Home = () => {
         </div>
         <br />
         <div className="info_collector">
-          <form onSubmit={handleSubmit}>
-            <div className="info_collector_header">
+          <form className="profile-form" onSubmit={handleSubmit}>
+            <div className="profile-row">
               <h3>
-                <b>输入你的基本信息</b>
+                <b>出生时间</b>
               </h3>
-            </div>
-            <div className="birth-time-row">
               <p>
-                <b>出生日期</b>
+                日期（必填）:
                 <br />
-                <select
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                >
-                  <option value=""></option>
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-                年
-                <select
-                  name="month"
-                  value={formData.month}
-                  onChange={handleChange}
-                >
-                  <option value=""></option>
-                  {months.map((month) => (
-                    <option key={month} value={month}>
-                      {month}
-                    </option>
-                  ))}
-                </select>
-                月
-                <select name="day" value={formData.day} onChange={handleChange}>
-                  <option value=""></option>
-                  {days.map((day) => (
-                    <option key={day} value={day}>
-                      {day}
-                    </option>
-                  ))}
-                </select>
-                日
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateField
+                    defaultValue={dayjs("1970-03-31")}
+                    format="YYYY-MM-DD"
+                    value={date}
+                    onChange={handleDateChange}
+                    sx={{
+                      width: "120px",
+                      margin: "4px 0",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "8px",
+                        border: "0.5px solid #999",
+                        boxShadow: "none",
+                        outline: "none",
+                        backgroundColor: "#fff",
+                      },
+                      "& .MuiInputBase-input": {
+                        fontSize: "14px",
+                        fontFamily: "Microsoft YaHei, sans-serif",
+                        textAlign: "center",
+                        padding: "2px 8px"
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
                 <br />
-                <select
-                  name="hour"
-                  value={formData.hour}
-                  onChange={handleChange}
-                >
-                  <option value=""></option>
-                  {hours.map((hour) => (
-                    <option key={hour} value={hour}>
-                      {hour}
-                    </option>
-                  ))}
-                </select>
-                时
-                <select
-                  name="minute"
-                  value={formData.minute}
-                  onChange={handleChange}
-                >
-                  <option value=""></option>
-                  {minutes.map((minute) => (
-                    <option key={minute} value={minute}>
-                      {minute}
-                    </option>
-                  ))}
-                </select>
-                分
-                {/* <br />  
-              <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时 */}
+                时间（必填）:
+                <br />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimeField
+                    defaultValue={dayjs("1970-03-31T23:59")}
+                    format="HH:mm"
+                    value={time}
+                    onChange={handleTimeChange}
+                    sx={{
+                      width: "80px",
+                      margin: "4px 0",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "8px",
+                        border: "0.5px solid #999",
+                        boxShadow: "none",
+                        outline: "none",
+                        backgroundColor: "#fff",
+                      },
+                      "& .MuiInputBase-input": {
+                        fontSize: "14px",
+                        fontFamily: "Microsoft YaHei, sans-serif",
+                        textAlign: "center",
+                        padding: "2px 8px",
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
               </p>
+              {/* <br />  
+                          <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时 */}
             </div>
-            <div className="birth-location-row">
-              <p>
+            <div className="profile-row">
+              <h3>
                 <b>出生地点</b>
-                <br />
+              </h3>
+              <p>
                 国家/地区：
                 <input
+                  className="profile-input"
                   type="text"
                   name="country"
                   size="10"
@@ -235,6 +244,7 @@ const Home = () => {
                 <br />
                 省份：
                 <input
+                  className="profile-input"
                   type="text"
                   name="state"
                   size="10"
@@ -245,6 +255,7 @@ const Home = () => {
                 <br />
                 城市：
                 <input
+                  className="profile-input"
                   type="text"
                   name="city"
                   size="10"
@@ -254,7 +265,9 @@ const Home = () => {
                 />
               </p>
             </div>
-            <button type="submit" disabled={isDisabled}>生成结果</button>
+            <button type="submit" disabled={isDisabled}>
+              生成结果
+            </button>
           </form>
         </div>
         {loading && (
@@ -381,20 +394,19 @@ function renderThemes(
           </h2>
           <div className="report_item_summary">
             <p>
-              <b>
-                如果你需要更细致更个性化的解读，请<Link to="/signin">登录</Link>或<Link to="/signup">注册</Link>
-                并创建你的档案。
-              </b>
-            </p>
-            <p>
               在本命盘上出现三次及以上的占星规则的组合，就是人生主题。人生主题可以帮助认识自我以及指明成长的方向。计算结果按照能量出现的次数
               <b>从高到低</b>
               排列。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
             </p>
+            <p>
+              <b>
+                如果你需要更细致更个性化的解读，请<Link to="/signin">登录</Link>
+                或<Link to="/signup">注册</Link>
+                并创建你的档案。
+              </b>
+            </p>
           </div>
-          <div>
-            {isLifeThemeResultOpen && renderThemesContent(themes)}
-          </div>
+          <div>{isLifeThemeResultOpen && renderThemesContent(themes)}</div>
         </div>
       </>
     );
@@ -491,15 +503,16 @@ function renderPlanetaryFocalizers(
           <div className="report_item_summary">
             <p>
               重点行星是本命盘中能量强大的行星，对全局有较为突出的影响。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
-              <br /><b>
-                更多详情，请<Link to="/signin">登录</Link>或<Link to="/signup">注册</Link>
+              <br />
+              <b>
+                更多详情，请<Link to="/signin">登录</Link>或
+                <Link to="/signup">注册</Link>
                 并创建你的档案。
               </b>
             </p>
           </div>
           <div>
-            {isDominantPlanetResultOpen &&
-              renderFocalizersContent(focalizers)}
+            {isDominantPlanetResultOpen && renderFocalizersContent(focalizers)}
           </div>
         </div>
       </>

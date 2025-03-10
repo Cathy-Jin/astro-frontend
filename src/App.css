@@ -149,6 +149,7 @@ label {
 
 .auth-row, .profile-row {
   text-align: left;
+  margin-top: 20px;
 }
 
 .profile-row {
@@ -158,15 +159,15 @@ label {
 
 .auth-input, .profile-input {
   border-radius: 8px;
-  width: min(75vw, 300px);
+  width: min(75vw, 250px);
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 8px;
   margin-top: 4px;
-  padding: 2px 4px;
+  padding: 2px 8px;
   box-shadow: none;
   outline: none;
-  border: 0.5px solid #999;
+  border: 1px solid #999;
 }
 
 /* ========== BUTTONS ========== */
@@ -233,13 +234,7 @@ button:hover {
   background-color: rgba(13, 22, 117);
 }
 
-.auth-button {
-  max-width: 200px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.profile-button, .profile-button-2 {
+.auth-button, .profile-button, .profile-button-2 {
   margin: 10px;
 }
 
@@ -320,8 +315,8 @@ button:hover {
 .background {
   text-align: left;
   padding: 5px;
-  max-width: 600px;
-  min-width: 20vw;
+  max-width: min(90vw, 600px);
+  min-width: 60vw;
   margin-left: auto;
   margin-right: auto;
 }
@@ -329,8 +324,7 @@ button:hover {
 /* Info Collector */
 .info_collector {
   height: calc(100% - 10px);
-  max-width: min(90vw, 1200px);
-  min-width: 60vw;
+  width: min(90vw, 1200px);
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
@@ -352,7 +346,7 @@ button:hover {
 .result {
   margin-top: 20px;
   text-align: left;
-  max-width: min(90vw, 1200px);
+  width: min(90vw, 1200px);
   /* min-width: 60vw; */
   margin-left: auto;
   margin-right: auto;
@@ -380,13 +374,12 @@ button:hover {
   margin: 0 auto;
   height: calc(100% - 10px);
   background-color: rgba(222, 234, 223, 0.2);
-  max-width: min(90vw, 1200px);
-  min-width: 60vw;
+  width: min(85vw, 1200px);
 }
 
 .user-profile-expansion-item {
-  margin: 10px;
-  width: min(85vw, 1200px);
+  margin-top: 20px;
+  width: min(90vw, 1200px);
   background-color: rgba(222, 234, 223, 0.2);
   margin-left: auto;
   margin-right: auto;
@@ -624,8 +617,11 @@ tr {
 }
 
 .textbox {
-  width: 100%;   
-  height: 100px;           
+  /* width: 100%; */
+  width: min(75vw, 300px);   
+  height: 100px;
+  font-family: 'Microsoft YaHei', sans-serif;
+  font-size: 14px;         
   overflow: hidden;         
   word-wrap: break-word;    
   box-sizing: border-box;  
