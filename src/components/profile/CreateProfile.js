@@ -123,7 +123,7 @@ const CreateProfile = () => {
               /></p>
             </div>
             <div className="profile-row">
-              <h3><b>出生时间</b></h3>
+              <h3>出生时间</h3>
               <p>
                 日期（必填）:
                 <br />
@@ -186,7 +186,7 @@ const CreateProfile = () => {
               <input type="checkbox" checked={formData.isDst} onChange={handleDSTChange} />是否是夏令时 */}
             </div>
             <div className="profile-row">
-              <h3><b>出生地点</b></h3>
+              <h3>出生地点</h3>
               <p>
                 国家/地区：
                 <input className="profile-input"

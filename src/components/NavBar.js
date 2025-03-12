@@ -31,7 +31,7 @@ const NavBar = () => {
         {user ? (
           <div className="navbar-links">
             <button
-              className="navbar-button"
+              className="navbar-button-profile"
               onClick={() => navigate("/profile")}
             >
               我的档案

@@ -25,7 +25,7 @@ const Signin = () => {
           body: JSON.stringify({
             email: email,
             password: password,
-            delta: rememberMe ? 24 : 1,
+            delta: rememberMe ? 24 * 7 : 24,  // 7 days vs. 1 day
           }),
           credentials: "include",
         }
@@ -67,9 +67,8 @@ const Signin = () => {
         <br />
         <br />
         <div className="info_collector">
-          
           <form className="auth-form" onSubmit={handleLogin}>
-          <h2>欢迎登录</h2>
+            <h2>欢迎登录</h2>
             <div className="auth-row">
               <p>
                 {error}

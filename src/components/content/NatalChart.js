@@ -10,6 +10,7 @@ import "react-tabs/style/react-tabs.css";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { toTwoDigits, convertToCardinal } from "../Util";
+import LifeThemeReading from "./LifeTheme";
 
 const NatalChart = () => {
   const [result, setResult] = useState(null);
@@ -91,7 +92,7 @@ const NatalChart = () => {
 
   if (!profile || profile.id !== profile_id) {
     return (
-      <div className="life-theme-reading">
+      <div className="natal-chart">
         <NavBar />
         <div className="main-content">
           <p>无法找到档案信息，请重试。</p>
@@ -109,38 +110,37 @@ const NatalChart = () => {
       <NavBar />
       <div className="main-content">
         <div className="user-profile-expansion-item">
-          <h2>
-            {profile.name}
-            <div className="user-profile-details">
-              {result && (
-                <>
-                  <span className="user-profile-tag-zodiac">
-                    太阳{result?.planet_info.sun.zodiac.slice(0, 2)}
-                  </span>
-                  <span className="user-profile-tag-zodiac">
-                    月亮{result?.planet_info.moon.zodiac.slice(0, 2)}
-                  </span>
-                  <span className="user-profile-tag-zodiac">
-                    上升{result?.planet_info.asc.zodiac.slice(0, 2)}
-                  </span>
-                  {renderPlanetTags(result?.planet_focalizer_modern)}
-                </>
-              )}
-            </div>
-          </h2>
-          <div className="user-profile-expansion-details-container">
-            <div className="user-profile-details">
-              <p>
-                {profile.year}-{toTwoDigits(profile.month)}-
-                {toTwoDigits(profile.day)} {toTwoDigits(profile.hour)}:
-                {toTwoDigits(profile.minute)}
-              </p>
-              <p>{profile.location}</p>
-              <p>{convertToCardinal(profile.lat, profile.lng)}</p>
-              <p>Placidus宫位制</p>
-            </div>
+          <h2>{profile.name}</h2>
+          <div>
+            {result && (
+              <>
+                <span className="user-profile-tag-zodiac">
+                  上升{result?.planet_info.asc.zodiac.slice(0, 2)}
+                </span>
+                <span className="user-profile-tag-zodiac">
+                  太阳{result?.planet_info.sun.zodiac.slice(0, 2)}
+                </span>
+                <span className="user-profile-tag-zodiac">
+                  月亮{result?.planet_info.moon.zodiac.slice(0, 2)}
+                </span>
+                {renderPlanetTags(result?.planet_focalizer_modern)}
+              </>
+            )}
+          </div>
+          <div>
+            <p>
+              {profile.year}-{toTwoDigits(profile.month)}-
+              {toTwoDigits(profile.day)} {toTwoDigits(profile.hour)}:
+              {toTwoDigits(profile.minute)}
+            </p>
+            <p>{profile.location}</p>
+            <p>{convertToCardinal(profile.lat, profile.lng)}</p>
+            <p>Placidus宫位制</p>
+          </div>
+
+          {/* <div className="user-profile-expansion-details-container">
             <button
-              className="profile-button-2"
+              className="profile-button"
               onClick={() =>
                 navigate("/life-theme?id=" + profile.id, {
                   state: { profile },
@@ -149,7 +149,7 @@ const NatalChart = () => {
             >
               人生主题解读
             </button>
-          </div>
+          </div> */}
         </div>
         {loading && (
           <div>
@@ -174,6 +174,12 @@ const NatalChart = () => {
                   >
                     重点行星（现代）
                   </Tab>
+                  <Tab
+                    className="natal-chart-tab"
+                    selectedClassName="natal-chart-tab--selected"
+                  >
+                    人生主题
+                  </Tab>
                 </TabList>
 
                 <TabPanel>{renderNatalChart(result)}</TabPanel>
@@ -183,6 +189,9 @@ const NatalChart = () => {
                     isExpanded,
                     toggleExpand
                   )}
+                </TabPanel>
+                <TabPanel>
+                  <LifeThemeReading />
                 </TabPanel>
               </Tabs>
             </>
@@ -310,7 +319,7 @@ function renderPlanetFocalizer(focalizers, isExpanded, toggleExpand) {
   if (focalizers.length === 0) {
     return (
       <>
-        <div className="natal-chart-item">
+        <div className="planet-focalizer-item">
           <p>似乎没有找到结果，请刷新或重试。</p>
         </div>
       </>
@@ -318,156 +327,154 @@ function renderPlanetFocalizer(focalizers, isExpanded, toggleExpand) {
   } else {
     return (
       <>
-        <div className="natal-chart-item-container">
-          <div className="natal-chart-item">
-            <h2>重点行星：{concatenatePlanetNames(domPlanets)}</h2>
-            <p>
-              <b>解读仅供参考，需要结合星盘全局分析</b>
-            </p>
-            {domPlanets.length === 1 ? (
-              <>
-                <p>{domPlanets[0].interpretation_cn}</p>
-              </>
-            ) : (
-              <ul>
-                {domPlanets.map((planet) => (
-                  <li key={planet.name_cn}>
-                    <p>{planet.interpretation_cn}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <br />
-            <h2>计算详情</h2>
-            <p
-              onClick={toggleExpand}
-              style={{ cursor: "pointer", textDecoration: "underline" }}
-            >
-              点击查看计算公式
-            </p>
-            {isExpanded && (
-              <>
-                <div>
-                  <p>
-                    <b>星体势力</b>
-                    <ul>
-                      <li>入庙（Domicile） +4</li>
-                      <li>擢升（Exaltation） +3</li>
-                      <li>失势（Detriment） +2</li>
-                      <li>落陷（Fall） +1</li>
-                    </ul>
-                  </p>
-                  <p>
-                    <b>星体落宫</b>
-                    <ul>
-                      <li>落于1宫或10宫 +1</li>
-                      <li>落于守护的宫位 +1</li>
-                    </ul>
-                  </p>
-                  <p>
-                    <b>星体合轴</b>
-                    <ul>
-                      <li>落在上升/下降点 +5</li>
-                      <li>落在天顶/天底 +3</li>
-                    </ul>
-                  </p>
-                  <p>
-                    <b>守护星</b>
-                    <ul>
-                      <li>命主星 +3</li>
-                      <li>其他行星落座的守护星（除入庙外） +1</li>
-                      <li>天顶落座的守护星 +1</li>
-                    </ul>
-                  </p>
-                  <p>
-                    <b>相位</b>
-                    <ul>
-                      <li>和其他行星形成合相（0°） +3</li>
-                      <li>和其他行星形成四分相（90°）或对分相（180°） +2</li>
-                      <li>和其他行星形成六分相（60°）或三分相（120°） +1</li>
-                    </ul>
-                  </p>
-                </div>
-              </>
-            )}
-            <table className="natal-chart-table">
-              <thead>
-                <tr>
-                  <th>
-                    <p>行星</p>
-                  </th>
-                  <th>
-                    <p>得分</p>
-                  </th>
-                  <th>
-                    <p>详情</p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "太阳",
-                  "sun"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "月亮",
-                  "moon"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "水星",
-                  "mercury"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "金星",
-                  "venus"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "火星",
-                  "mars"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "木星",
-                  "jupiter"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "土星",
-                  "saturn"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "天王星",
-                  "uranus"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "海王星",
-                  "neptune"
-                )}
-                {renderPlanetFocalizerTableRow(
-                  focalizers,
-                  domScore,
-                  "冥王星",
-                  "pluto"
-                )}
-              </tbody>
-            </table>
-          </div>
+        <div className="planet-focalizer-item">
+          <h2>重点行星：{concatenatePlanetNames(domPlanets)}</h2>
+          <p>
+            <b>解读仅供参考，需要结合星盘全局分析</b>
+          </p>
+          {domPlanets.length === 1 ? (
+            <>
+              <p>{domPlanets[0].interpretation_cn}</p>
+            </>
+          ) : (
+            <ul>
+              {domPlanets.map((planet) => (
+                <li key={planet.name_cn}>
+                  <p>{planet.interpretation_cn}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <br />
+          <h3>计算详情</h3>
+          <p
+            onClick={toggleExpand}
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+          >
+            点击查看计算公式
+          </p>
+          {isExpanded && (
+            <>
+              <div>
+                <p>
+                  <b>星体势力</b>
+                  <ul>
+                    <li>入庙（Domicile） +4</li>
+                    <li>擢升（Exaltation） +3</li>
+                    <li>失势（Detriment） +2</li>
+                    <li>落陷（Fall） +1</li>
+                  </ul>
+                </p>
+                <p>
+                  <b>星体落宫</b>
+                  <ul>
+                    <li>落于1宫或10宫 +1</li>
+                    <li>落于守护的宫位 +1</li>
+                  </ul>
+                </p>
+                <p>
+                  <b>星体合轴</b>
+                  <ul>
+                    <li>落在上升/下降点 +5</li>
+                    <li>落在天顶/天底 +3</li>
+                  </ul>
+                </p>
+                <p>
+                  <b>守护星</b>
+                  <ul>
+                    <li>命主星 +3</li>
+                    <li>其他行星落座的守护星（除入庙外） +1</li>
+                    <li>天顶落座的守护星 +1</li>
+                  </ul>
+                </p>
+                <p>
+                  <b>相位</b>
+                  <ul>
+                    <li>和其他行星形成合相（0°） +3</li>
+                    <li>和其他行星形成四分相（90°）或对分相（180°） +2</li>
+                    <li>和其他行星形成六分相（60°）或三分相（120°） +1</li>
+                  </ul>
+                </p>
+              </div>
+            </>
+          )}
+          <table className="natal-chart-table">
+            <thead>
+              <tr>
+                <th>
+                  <p>行星</p>
+                </th>
+                <th>
+                  <p>得分</p>
+                </th>
+                <th>
+                  <p>详情</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "太阳",
+                "sun"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "月亮",
+                "moon"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "水星",
+                "mercury"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "金星",
+                "venus"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "火星",
+                "mars"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "木星",
+                "jupiter"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "土星",
+                "saturn"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "天王星",
+                "uranus"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "海王星",
+                "neptune"
+              )}
+              {renderPlanetFocalizerTableRow(
+                focalizers,
+                domScore,
+                "冥王星",
+                "pluto"
+              )}
+            </tbody>
+          </table>
         </div>
       </>
     );
@@ -523,7 +530,7 @@ function renderPlanetFocalizerTableRow(focalizers, domScore, name_cn, name) {
   return (
     <tr>
       <td width="25%">
-        <p>
+        <p> 
           <img
             src={`symbol/planet/${name}.svg`}
             alt={name}

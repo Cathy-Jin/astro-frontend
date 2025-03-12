@@ -120,7 +120,6 @@ const Signup = () => {
               </button>
             </div>
           </form>
-          <br />
           {success}
         </div>
       </div>

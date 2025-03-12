@@ -1,10 +1,37 @@
 :root {
-  /* https://www.schemecolor.com/smoky-purples.php */
+  --logo-color: rgb(78, 42, 105);
+  --maximum-purple: rgb(89, 57, 116);
+  --cool-gray: rgb(142, 136, 172);
+  --lavendar-gray: rgb(188, 194, 213);
+  --hunter-green: rgb(50, 85, 60);
+  --honeydew: rgb(216, 230, 211);
+  --beige: rgb(237, 238, 217);
+  --teal-blue: rgb(46, 110, 137);
+  --glacier: rgb(139, 174, 178);
+  --shadow-gray: rgb(74, 74, 74);
+
+  --logo-color-30: rgb(78, 42, 105, 0.3);
+  --logo-color-70: rgb(78, 42, 105, 0.7);
+
+  --maximum-purple-5: rgba(89, 57, 116, 0.05);
+  --maximum-purple-10: rgb(89, 57, 116, 0.1);
+  --maximum-purple-20: rgb(89, 57, 116, 0.2);
+  --maximum-purple-50: rgb(89, 57, 116, 0.5);
+  --maximum-purple-70: rgb(89, 57, 116, 0.7);
+
+  --teal-blue-10: rgba(46, 110, 137, 0.1);
+  --teal-blue-70: rgb(46, 110, 137, 0.7);
+
+  --hunter-green-5: rgb(50, 85, 60, 0.05);
+  --hunter-green-10: rgb(50, 85, 60, 0.1);
+  --hunter-green-20: rgb(50, 85, 60, 0.2);
+  --hunter-green-50: rgb(50, 85, 60, 0.5);
+  --hunter-green-70: rgb(50, 85, 60, 0.7);
 }
 
 @font-face {
-  font-family: 'ChillJinshuSongRegular';
-  src: url('fonts/ChillJinshuSongRegular.woff') format('woff');
+  font-family: "ChillJinshuSongRegular";
+  src: url("fonts/ChillJinshuSongRegular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -19,9 +46,10 @@
 /* ========== GLOBAL STYLES ========== */
 
 body {
-  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
-    "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular",
+    "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "WenQuanYi Micro Hei",
+    sans-serif;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -33,27 +61,31 @@ body {
 
 .App {
   text-align: center;
-  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
-    "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular",
+    "lucida grande", "lucida sans unicode", lucida, helvetica,
+    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", "WenQuanYi Micro Hei",
+    sans-serif;
 }
 
 /* Typography */
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   margin: 0;
   padding: 0;
 }
 
 h1 {
   font-size: 36px;
-  color: rgb(67, 10, 114);
+  color: var(--maximum-purple);
   font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-size: 24px;
   margin-bottom: 3px;
-  color: rgb(70, 15, 114);
+  color: var(--maximum-purple);
   font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
@@ -63,21 +95,22 @@ h3 {
   line-height: 1.5;
   margin: -7px 0 2px 0;
   display: inherit;
-  color: rgb(73, 20, 114);
+  color: var(--maximum-purple);
   font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
 }
 
 h4 {
   text-align: center;
-  color: rgba(78, 11, 132, 0.536);
+  color: var(--maximum-purple-70);
   margin: 0;
 }
 
-p, ul {
+p,
+ul {
   font-size: 14px;
   line-height: 24px;
   margin: 0 0 8px;
-  color: #999;
+  color: var(--shadow-gray);
 }
 
 ul {
@@ -86,7 +119,7 @@ ul {
 }
 
 b {
-  color: #3b3b3b;
+  color: black;
 }
 
 hr {
@@ -105,10 +138,9 @@ footer {
 }
 
 footer a {
-  color: rgba(78, 11, 132, 0.536);
+  color: var(--maximum-purple-70);
   text-decoration: none;
 }
-
 
 /* ========== FORM ELEMENTS ========== */
 form {
@@ -118,7 +150,8 @@ form {
   gap: 20px;
 }
 
-select, input {
+select,
+input {
   font-size: 14px;
   margin-top: 5px;
   margin-right: 8px;
@@ -132,9 +165,9 @@ select {
 
 input {
   padding: 1px;
-  font-family: "Microsoft YaHei", "SourceHanSansSC", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC", 
-    "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "lucida grande",
+    "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Noto Sans SC",
+    "PingFang SC", "WenQuanYi Micro Hei", sans-serif;
 }
 
 label {
@@ -147,7 +180,12 @@ label {
   gap: 10px;
 }
 
-.auth-row, .profile-row {
+.auth-form h2 {
+  color: black;
+}
+
+.auth-row,
+.profile-row {
   text-align: left;
   margin-top: 20px;
 }
@@ -156,8 +194,13 @@ label {
   width: min(80vw, 300px);
 }
 
+.profile-row h2,
+.profile-row h3 {
+  color: black;
+}
 
-.auth-input, .profile-input {
+.auth-input,
+.profile-input {
   border-radius: 8px;
   width: min(75vw, 250px);
   margin-left: 0;
@@ -171,9 +214,8 @@ label {
 }
 
 /* ========== BUTTONS ========== */
-button, .navbar-button, .navbar-button-2 {
-  font-family: "SourceHanSansSC", "Microsoft YaHei", "ChillJinshuSongRegular", "lucida grande", "lucida sans unicode", lucida, helvetica,
-    "Hiragino Sans GB", "Noto Sans SC", "PingFang SC",
+button {
+  font-family: "Microsoft YaHei", "SourceHanSansSC", "PingFang SC",
     "WenQuanYi Micro Hei", sans-serif;
   border: none;
   border-radius: 5px;
@@ -182,59 +224,79 @@ button, .navbar-button, .navbar-button-2 {
   cursor: pointer;
   transition: background-color 0.3s ease;
   height: 32px;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   text-align: center;
   white-space: nowrap;
-}
-
-button {
-  background-color: rgb(77, 11, 132, 0.7);
+  background-color: var(--teal-blue-70);
   color: white;
   margin-top: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
 }
 
 button:hover {
-  background-color: rgb(77, 11, 132);
+  background-color: var(--teal-blue);
 }
 
-.navbar-button-2, .profile-button-2 {
+.navbar-button {
+  background-color: white;
+  color: var(--shadow-gray);
+}
+
+.navbar-button:hover {
+  background-color: var(--logo-color-30);
+}
+
+.navbar-button-profile {
+  background-color: var(--logo-color-70);
+  color: white;
+}
+
+.navbar-button-profile:hover {
+  background-color: var(--logo-color);
+}
+
+.profile-button {
+  background-color: var(--hunter-green-70);
+}
+
+.profile-button:hover {
+  background-color: var(--hunter-green);
+}
+
+.profile-button-2 {
   background-color: rgba(229, 222, 234, 0.5);
   color: rgba(77, 11, 132);
 }
 
-.navbar-button-2:hover, .profile-button-2:hover {
+.profile-button-2:hover {
   background-color: rgba(229, 222, 234);
 }
 
-.collapse-btn, .life_theme_item_collapse_btn {
+.collapse-btn,
+.life_theme_item_collapse_btn {
   font-size: 16px;
-  margin-bottom: 10px;
   width: 32px;
   padding: 0 8px;
+  font-weight: bold;
 }
 
-.collapse-btn {
-  background-color: rgba(29, 85, 34, 0.7);
-}
-
+.collapse-btn,
 .life_theme_item_collapse_btn {
-  background-color: rgba(13, 22, 117, 0.7);
-} 
-
-.collapse-btn:hover {
-  background-color: rgba(29, 85, 34);
+  background-color: var(--maximum-purple-70);
+  margin-bottom: 10px;
 }
 
+.collapse-btn:hover,
 .life_theme_item_collapse_btn:hover {
-  background-color: rgba(13, 22, 117);
+  background-color: var(--maximum-purple);
 }
 
-.auth-button, .profile-button, .profile-button-2 {
+.auth-button,
+.profile-button,
+.profile-button-2 {
   margin: 10px;
 }
 
@@ -245,7 +307,7 @@ button:hover {
 }
 
 .deletion-button:hover {
-  background-color: rgba(229, 222, 234);
+  background-color: var(--hunter-green-10);
 }
 
 .deletion-button-image {
@@ -261,10 +323,10 @@ button:hover {
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: last baseline;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -275,7 +337,9 @@ button:hover {
 
 .navbar-title {
   margin: 0;
-  font-family: "ChillJinshuSongRegular", "SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  font-family: "ChillJinshuSongRegular", "SourceHanSansSC", "Microsoft YaHei",
+    sans-serif;
+  color: var(--logo-color);
 }
 
 .navbar-text {
@@ -283,9 +347,10 @@ button:hover {
   bottom: 0;
 }
 
-.navbar-right, .navbar-links {
+.navbar-right,
+.navbar-links {
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 
 /* Responsive Styles */
@@ -295,10 +360,11 @@ button:hover {
   }
 
   .navbar-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
-  .navbar-button, .navbar-button-2 {
+  .navbar-button,
+  .navbar-button-profile {
     font-size: 0.9rem;
     padding: 6px 12px;
   }
@@ -312,13 +378,16 @@ button:hover {
 }
 
 /* FAQ Background */
-.background {
+.background,
+.life-theme-faq {
   text-align: left;
   padding: 5px;
-  max-width: min(90vw, 600px);
+  max-width: min(80vw, 600px);
   min-width: 60vw;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 0;
 }
 
 /* Info Collector */
@@ -328,18 +397,21 @@ button:hover {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgba(229, 222, 234, 0.2);
+  background-color: var(--teal-blue-10);
   border-radius: 8px;
   text-align: center;
 }
 
-.info_collector_header, .birth-time-row, .birth-location-row {
+.info_collector_header,
+.birth-time-row,
+.birth-location-row {
   align-items: center;
 }
 
-.birth-time-row select, .birth-location-row select {
+.birth-time-row select,
+.birth-location-row select {
   margin-left: 5px;
-  margin-right: 5px
+  margin-right: 5px;
 }
 
 /* Report Result */
@@ -354,33 +426,32 @@ button:hover {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-
 }
 
 /* Report Text Item */
-.report_item, .user-profile-item, .user-profile-item-dash, .user-profile-expansion-item, .life_theme_item {
+.report_item,
+.user-profile-item,
+.user-profile-item-dash,
+.user-profile-expansion-item,
+.life_theme_item {
   padding: 20px;
   border-radius: 8px;
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   overflow: hidden;
 }
 
-.life_theme_item {
-  background-color: rgba(222, 223, 234, 0.2);
-  height: calc(100% - 10px);
-}
-
 .report_item {
-  margin: 0 auto;
+  margin: 0 0 20px 0;
   height: calc(100% - 10px);
-  background-color: rgba(222, 234, 223, 0.2);
+  /* background-color: rgba(222, 234, 223, 0.2); */
+  background-color: var(--maximum-purple-5);
   width: min(85vw, 1200px);
 }
 
 .user-profile-expansion-item {
   margin-top: 20px;
-  width: min(90vw, 1200px);
-  background-color: rgba(222, 234, 223, 0.2);
+  width: min(80vw, 1200px);
+  background-color: var(--hunter-green-5);
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -389,12 +460,13 @@ button:hover {
   justify-content: center;
 }
 
-.user-profile-item, .user-profile-item-dash {
+.user-profile-item,
+.user-profile-item-dash {
   margin: 10px;
   text-align: center;
-  width: min(90vw, 400px);
+  width: min(85vw, 400px);
   height: 145px;
-  background-color: rgba(222, 234, 223, 0.2);
+  background-color: var(--hunter-green-5);
 }
 
 .user-profile-item-dash {
@@ -402,25 +474,32 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: transparent;
-  border: 1px dotted #999; */
 }
 
-.user-profile-item h2, .user-profile-expansion-item h2 {
+.user-profile-item h2,
+.user-profile-expansion-item h2 {
   text-align: left;
   display: flex;
   justify-content: space-between;
-  align-items: baseline; 
-  width: 100%; 
+  align-items: baseline;
+  width: 100%;
   flex-wrap: wrap;
+  color: black;
 }
 
-.user-profile-item p, .user-profile-expansion-item p {
+.user-profile-expansion-item div {
+  text-align: left;
+  width: 100%;
+}
+
+.user-profile-item p,
+.user-profile-expansion-item p {
   text-align: left;
   margin: 0;
 }
 
-.user-profile-details-container, .user-profile-expansion-details-container {
+.user-profile-details-container,
+.user-profile-expansion-details-container {
   display: flex;
   align-items: last baseline;
   justify-content: space-between;
@@ -433,48 +512,61 @@ button:hover {
   margin: 20px 0 10px 0;
 }
 
-.user-profile-tag-zodiac, .user-profile-tag-planet {
+.user-profile-tag-zodiac,
+.user-profile-tag-planet {
   font-size: 12px;
-  margin: 5px;
-  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  margin: 5px 5px 5px 0;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", sans-serif;
   border-radius: 4px;
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   background-color: rgba(29, 85, 34, 0.7);
   color: white;
   font-weight: lighter;
-  /*border: 2px solid #4A90E2;  Border color */
   padding: 4px 8px; /* Add some spacing inside */
   display: inline-block; /* Ensures proper spacing */
 }
 
 .user-profile-tag-zodiac {
-  background-color: rgba(29, 85, 34, 0.7);
+  background-color: var(--glacier);
 }
 
 .user-profile-tag-planet {
-  background-color:rgb(13, 22, 117, 0.7);
+  background-color: var(--cool-gray);
 }
 
 .life_theme_item {
   margin: 0 auto 10px auto;
   box-sizing: border-box;
+  width: min(90vw, 1200px);
+  height: calc(100% - 10px);
+  padding: 10px;
 }
 
-.report_item h2, .life_theme_item h2 {
+.report_item h2,
+.life_theme_item h2 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
 
-.report_item h2 {
-  color: rgba(29, 85, 34);
+.report_item h2,
+.report_item h3 {
+  color: var(--maximum-purple);
 }
 
 .life_theme_item h2 {
-  color: rgb(13, 22, 117);
+  color: var(--maximum-purple);
 }
 
-.report_item_summary, .life_theme_item_summary, .natal-chart-item {
+.life_theme_item hr {
+  border-color: var(--lavendar-gray);
+  margin: 0;
+}
+
+.report_item_summary,
+.life_theme_item_summary,
+.natal-chart-item,
+.planet-focalizer-item {
   display: flex;
   flex-direction: column;
   margin: 5px auto;
@@ -487,6 +579,18 @@ button:hover {
   width: min(90vw, 500px);
 }
 
+.natal-chart-item h2,
+.planet-focalizer-item h2,
+.planet-focalizer-item h3,
+.life_theme_item_detail h2,
+.life_theme_item_detail h3 {
+  color: var(--maximum-purple);
+}
+
+.planet-focalizer-item {
+  width: min(90vw, 1200px);
+}
+
 .natal-chart-item-container {
   max-width: min(90vw, 1200px);
   min-width: 60vw;
@@ -497,29 +601,38 @@ button:hover {
 }
 
 .report_item_summary {
-  background-color: rgba(222, 234, 223, 0.7);
+  background-color: var(--maximum-purple-10);
 }
 
 .life_theme_item_summary {
-  background-color: #dedfeab3;
+  background-color: var(--maximum-purple-5);
+  margin-top: 10px;
+  width: 95%;
 }
 
-.report_item_summary p {
-  color: #818181;
-}
-
+.report_item_summary p,
 .life_theme_item_summary p {
-  color: #818181;
-  text-align: left;
+  color: var(--shadow-gray);
 }
 
-.life_theme_item_detail h3 {
-  text-align: left;
-  margin: 5px auto;
-  color: rgb(13, 22, 117);
+.life-theme-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: min(90vw, 1200px);
+  border-radius: 8px;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  background-color: var(--teal-blue-10);
+  margin: 10px auto 20px auto;
 }
 
-.life_theme_item_detail ul{
+.life-theme-faq h4 {
+  color: var(--teal-blue);
+  margin-top: 10px;
+}
+
+.life_theme_item_detail ul {
   text-align: left;
 }
 
@@ -530,7 +643,8 @@ table {
   margin: 10px 0;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
@@ -545,8 +659,8 @@ tr {
 }
 
 .planet_focialier_result_table th {
-  background-color: rgba(222, 234, 223, 0.7);
-  color: #818181;
+  background-color: var(--maximum-purple-20);
+  color: var(--shadow-gray);
 }
 
 .focalizer_pattern_row {
@@ -554,25 +668,26 @@ tr {
   text-align: left;
 }
 
-.natal-chart-table td, .natal-chart-table th {
+.natal-chart-table td,
+.natal-chart-table th {
   padding: 0;
   margin: 5px 0;
   min-width: 30px;
 }
 
 .natal-chart-table th {
-  background-color: rgba(222, 234, 223, 0.7);
-  color: #818181;
+  background-color: var(--hunter-green-10);
+  color: var(--shadow-gray);
 }
 
-.natal-chart-table td p, .natal-chart-table th p {
+.natal-chart-table td p,
+.natal-chart-table th p {
   margin: 3px 0;
 }
 
-
 /* Tabs */
 .natal-chart-tablist {
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid var(--cool-gray);
   margin: 0 0 10px;
   padding: 0;
 }
@@ -586,22 +701,23 @@ tr {
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
-  font-family:"SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", sans-serif;
 }
 
 .natal-chart-tab:hover {
-  color: rgb(67, 10, 114, 0.7);
-  font-weight: bold;
-  background-color: #eeeeee;
+  color: var(--maximum-purple);
+  background-color: var(--maximum-purple-10);
+  font-family: "Microsoft YaHei", "SourceHanSansSC", sans-serif;
 }
 
 .natal-chart-tab--selected {
   background: #fff;
-  border-color: #aaa;
-  color: rgb(67, 10, 114);
+  border-color: var(--cool-gray);
+  border-bottom: white;
+  color: var(--maximum-purple);
   border-radius: 5px 5px 0 0;
   font-weight: bold;
-  font-family:"SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  font-family: "Microsoft YaHei", "SourceHanSansSC", sans-serif;
 }
 
 /* ========== Terms of Service / Privacy Notice / Feedback =========== */
@@ -613,19 +729,18 @@ tr {
 .term-item h3 {
   text-align: left;
   margin: 5px auto;
-  color: rgba(78, 11, 132, 0.85);
+  color: var(--maximum-purple);
 }
 
 .textbox {
-  /* width: 100%; */
-  width: min(75vw, 300px);   
-  height: 100px;
-  font-family: 'Microsoft YaHei', sans-serif;
-  font-size: 14px;         
-  overflow: hidden;         
-  word-wrap: break-word;    
-  box-sizing: border-box;  
-  resize: none;            
+  width: min(75vw, 300px);
+  height: 150px;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  resize: none;
 }
 
 /* ========== UTILITIES ========== */
@@ -641,6 +756,6 @@ tr {
 }
 
 .error {
-  color: rgb(220, 26, 26);
+  color: red;
   text-align: center;
 }

@@ -5,10 +5,7 @@ import {
   useNavigate,
   Link,
 } from "react-router-dom";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
 import CircleGraph from "./LifeThemeDiagram";
-import { toTwoDigits, convertToCardinal } from "../Util";
 
 const LifeThemeReading = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +30,7 @@ const LifeThemeReading = () => {
     const fetchLifeTheme = async () => {
       try {
         setLoading(true);
-        setRateLimiting(false);
+        // setRateLimiting(false);
         const response = await fetch(
           "https://astro-notebook.onrender.com/life-theme",
           {
@@ -84,120 +81,80 @@ const LifeThemeReading = () => {
         console.error("Error fetching profile:", error);
       } finally {
         setLoading(false);
-        setRateLimiting(false);
+        // setRateLimiting(false);
       }
     };
 
-    const lastFetch = sessionStorage.getItem("lastFetchTime");
-    const now = Date.now();
+    fetchLifeTheme();
 
-    if (lastFetch && now - lastFetch <= RATE_LIMIT_MS) {
-      setLoading(false);
-      setRateLimiting(true);
-    } else {
-      // Allow API call if no timestamp or enough time has passed
-      setRateLimiting(false);
-      fetchLifeTheme();
-    }
-    sessionStorage.setItem("lastFetchTime", now);
-  }, [profile_id]);
+    // const lastFetch = sessionStorage.getItem("lastFetchTime");
+    // const now = Date.now();
+
+    // if (lastFetch && now - lastFetch <= RATE_LIMIT_MS) {
+    //   setLoading(false);
+    //   setRateLimiting(true);
+    // } else {
+    //   // Allow API call if no timestamp or enough time has passed
+    //   // setRateLimiting(false);
+    //   fetchLifeTheme();
+    // }
+    // sessionStorage.setItem("lastFetchTime", now);
+  }, [profile_id, profile]);
 
   if (!profile || profile.id !== profile_id) {
     return (
-      <div className="life-theme-reading">
-        <NavBar />
-        <div className="main-content">
-          <p>无法找到档案信息，请重试。</p>
-          <button className="auth-button" onClick={() => navigate("/profile")}>
-            返回我的档案
-          </button>
-        </div>
-        <Footer />
+      <div className="life-theme-header">
+        <p>无法找到档案信息，请重试。</p>
       </div>
     );
   }
 
   return (
-    <div className="life-theme-reading">
-      <NavBar />
-      <div className="main-content">
-        <div className="user-profile-expansion-item" key={profile.id}>
-          <div className="user-profile-expansion-details-container">
-            <div className="user-profile-details">
-              <h2>{profile.name}</h2>
-              <p>
-                {profile.year}-{toTwoDigits(profile.month)}-
-                {toTwoDigits(profile.day)} {toTwoDigits(profile.hour)}:
-                {toTwoDigits(profile.minute)}
-              </p>
-              <p>{profile.location}</p>
-              <p>{convertToCardinal(profile.lat, profile.lng)}</p>
-              <p>Placidus宫位制</p>
-              <h1>人生主题</h1>
-              <p
-                onClick={toggleExpand}
-                style={{ cursor: "pointer", textDecoration: "underline" }}
-              >
-                什么是人生主题？
-              </p>
-              {isExpanded && (
-                <>
-                  <p>
-                    在占星学中，星盘以星座、宫位、行星三大元素构成。这三者互相交织，形成了独特的占星符号体系。
-                  </p>
-                  <p>
-                    “人生主题”指在本命盘中，某些特定的占星规则以三种或多种形式出现时所形成的强大动力。
-                  </p>
-                  <p>
-                    比如，土星落在天秤座、金星落在摩羯座、或者七宫与十宫之间的相位互动，这些都构成了7-10这一人生主题。
-                  </p>
-                  <p>
-                    <b>
-                      每个人的人生主题不尽相同，数量多少也并无好坏之分。我们都是独一无二的自己。
-                    </b>
-                  </p>
-                </>
-              )}
-            </div>
-            {reading && (
-              <CircleGraph
-                relationships={getRelationships(reading.life_themes)}
-              />
-            )}
-          </div>
-        </div>
+    <>
+      <div className="life-theme-header">
         {loading && (
-          <p textAlign="center">
+          <p>
             正在努力生成专属于{profile.name}
             的个性化解读，第一次可能需要几分钟的时间，<b>请勿刷新页面</b>
             。谢谢你的耐心等待！
           </p>
         )}
-        {rateLimiting && (
+        {/* {rateLimiting && (
           <div className="error">请勿频繁刷新页面。10秒后再试哦~</div>
-        )}
+        )} */}
         {error}
-
-        <div className="result">
-          <p><b>解读按人生主题能量从高到低排序，内容仅供参考。</b></p>
-          {reading.life_themes?.map((life_theme, index) => (
-            <LifeThemeItemReading key={index} life_theme={life_theme} />
-          ))}
+        {reading && (
+          <CircleGraph relationships={getRelationships(reading.life_themes)} />
+        )}
+        <div className="life-theme-faq">
+          <h4
+            onClick={toggleExpand}
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+          >
+            什么是人生主题？
+          </h4>
+          {isExpanded && (
+            <>
+              <p>
+                在占星学中，星盘以星座、宫位、行星三大元素构成。这三者互相交织，形成了独特的占星符号体系。
+              </p>
+              <p>
+                人生主题指在本命盘上出现三次及以上的占星规则交互。
+                举个例子——金星、天秤座及七宫都代表了7的占星规则。土星、魔羯座及十宫都代表了10的占星规则。那么，土星落在天秤座、金星落在摩羯座、金星在十宫、或者七宫与十宫行星之间形成的主要相位，这些都构成了7-10这一占星规则的交互。如果7-10的能量在本命盘上出现三次及以上，那么它就成为了人生主题。
+              </p>
+              <p>
+                <b>
+                  每个人的人生主题不尽相同，数量多少也并无好坏之分。我们都是独一无二的自己。解读仅供参考。
+                </b>
+              </p>
+            </>
+          )}
         </div>
-
-        <button
-          className="profile-button"
-          onClick={() =>
-            navigate("/profile-detail?id=" + profile.id, {
-              state: { profile },
-            })
-          }
-        >
-          返回档案详情
-        </button>
       </div>
-      <Footer />
-    </div>
+      {reading.life_themes?.map((life_theme, index) => (
+        <LifeThemeItemReading key={index} life_theme={life_theme} />
+      ))}
+    </>
   );
 };
 
@@ -212,7 +169,8 @@ function getRelationships(life_themes) {
         relationships.push([parseInt(matches[0]), parseInt(matches[1])]);
       }
     }
-  }); 
+    return [];
+  });
   return relationships;
 }
 
@@ -230,37 +188,35 @@ function LifeThemeItemReading({ life_theme }) {
             {isOpen ? "-" : "+"}
           </button>
         </h2>
-        <div className="life_theme_item_summary">
-          <p>{life_theme.reading.summary}</p>
-        </div>
+        <hr />
         <div className="life_theme_item_detail">
           {isOpen && (
             <>
+              <div className="life_theme_item_summary">
+                <p>{life_theme.reading.summary}</p>
+              </div>
+              <br />
               <h3>💡</h3>
-              <ul>
-                <li>
-                  <b>生活</b> {life_theme.reading.suggestions.life}
-                </li>
-                <li>
-                  <b>学习</b> {life_theme.reading.suggestions.study}
-                </li>
-                <li>
-                  <b>工作</b> {life_theme.reading.suggestions.work}
-                </li>
-                <li>
-                  <b>人际</b> {life_theme.reading.suggestions.relationship}
-                </li>
-              </ul>
+              <p>
+                <b>生活：</b>
+                {life_theme.reading.suggestions.life}
+              </p>
+              <p>
+                <b>学习：</b> {life_theme.reading.suggestions.study}
+              </p>
+              <p>
+                <b>工作：</b> {life_theme.reading.suggestions.work}
+              </p>
+              <p>
+                <b>人际：</b> {life_theme.reading.suggestions.relationship}
+              </p>
+              <br />
               <h3>星盘中表现形式</h3>
-              <ul>
                 {life_theme.reading.details?.map((detail) => (
-                  <li>
                     <p>
-                      <b>{detail.pattern}</b> {detail.interpretation}
+                      <b>{detail.pattern}：</b> {detail.interpretation}
                     </p>
-                  </li>
                 ))}
-              </ul>
             </>
           )}
         </div>

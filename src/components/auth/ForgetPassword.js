@@ -70,7 +70,6 @@ const ForgetPassword = () => {
               {isDisabled ? "正在验证……" : "验证邮箱"}
             </button>
           </form>
-          <br />
           {message}
         </div>
       </div>

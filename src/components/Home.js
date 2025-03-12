@@ -6,9 +6,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField, TimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import CircleGraph from "./content/LifeThemeDiagram";
 
 const Home = () => {
-  const currentYear = new Date().getFullYear(); // Get the current year dynamically
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [loading, setLoading] = useState(false); // Add loading state
@@ -106,16 +106,6 @@ const Home = () => {
     setIsDisabled(false);
   };
 
-  // Generate lists for each dropdown
-  const years = Array.from(
-    { length: currentYear - 1920 + 1 },
-    (_, i) => currentYear - i
-  );
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const hours = Array.from({ length: 24 }, (_, i) => i);
-  const minutes = Array.from({ length: 60 }, (_, i) => i);
-
   return (
     <div className="home">
       <NavBar />
@@ -159,7 +149,6 @@ const Home = () => {
             </p>
           )}
         </div>
-        <br />
         <div className="info_collector">
           <form className="profile-form" onSubmit={handleSubmit}>
             <div className="profile-row">
@@ -189,7 +178,7 @@ const Home = () => {
                         fontSize: "14px",
                         fontFamily: "Microsoft YaHei, sans-serif",
                         textAlign: "center",
-                        padding: "2px 8px"
+                        padding: "2px 8px",
                       },
                     }}
                   />
@@ -348,7 +337,6 @@ function renderResult(
           isDominantPlanetResultOpen,
           toggleDominantPlanetResultCollapse
         )}
-        <br />
         {renderThemes(
           result.themes,
           isLifeThemeResultOpen,
@@ -392,11 +380,10 @@ function renderThemes(
               {isLifeThemeResultOpen ? "-" : "+"}
             </button>
           </h2>
+          <CircleGraph relationships={getRelationships(themes)} />
           <div className="report_item_summary">
             <p>
-              在本命盘上出现三次及以上的占星规则的组合，就是人生主题。人生主题可以帮助认识自我以及指明成长的方向。计算结果按照能量出现的次数
-              <b>从高到低</b>
-              排列。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
+              人生主题指在本命盘上出现三次及以上的占星规则交互。点击+展开后，计算结果按照能量出现的次数从高到低排列。对本命盘的进一步分析应结合太阳、月亮、上升点等其他因素综合判断。
             </p>
             <p>
               <b>
@@ -411,6 +398,22 @@ function renderThemes(
       </>
     );
   }
+}
+
+function getRelationships(themes) {
+  const relationships = [];
+  themes?.map((item) => {
+    const matches = item.name_cn.match(/\d+/g);
+    if (matches) {
+      if (matches.length === 1) {
+        relationships.push([parseInt(matches[0]), parseInt(matches[0])]);
+      } else {
+        relationships.push([parseInt(matches[0]), parseInt(matches[1])]);
+      }
+    }
+    return [];
+  });
+  return relationships;
 }
 
 function renderThemesContent(energies) {
@@ -488,11 +491,13 @@ function renderPlanetaryFocalizers(
       </>
     );
   } else {
+    const domScore = focalizers[0].score;
+    const domPlanets = focalizers.filter((item) => item.score === domScore);
     return (
       <>
         <div className="report_item">
           <h2>
-            重点行星{" "}
+            重点行星：{concatenatePlanetNames(domPlanets)}{" "}
             <button
               className="collapse-btn"
               onClick={toggleDominantPlanetResultOpen}
@@ -522,11 +527,9 @@ function renderPlanetaryFocalizers(
 
 function renderFocalizersContent(focalizers) {
   const domScore = focalizers[0].score;
-  const domPlanets = focalizers.filter((item) => item.score === domScore);
   return (
     <>
       <hr />
-      <h3>重点行星：{concatenatePlanetNames(domPlanets)}</h3>
       <p>
         <table className="planet_focialier_result_table">
           <thead>

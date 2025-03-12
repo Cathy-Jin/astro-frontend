@@ -132,8 +132,8 @@ const ProfileOverview = () => {
             <p>正在获取档案，请稍后。。。</p>
           </div>
         )}
+        {generalError}
         <div className="result">
-          {generalError}
           {profiles?.map((profile) => (
             <div className="user-profile-item" key={profile.id}>
               <h2>
@@ -174,11 +174,11 @@ const ProfileOverview = () => {
               {errors[profile.id]}
             </div>
           ))}
-          <div className="user-profile-item-dash">
+          {profiles && (<div className="user-profile-item-dash">
             <h2 >
               <Link to="/create-profile" className="no-underline">+ 创建档案</Link>
             </h2>
-          </div>
+          </div>)}
         </div>
       </div>
       <Footer />
