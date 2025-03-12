@@ -625,6 +625,7 @@ button:hover {
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   background-color: var(--teal-blue-10);
   margin: 10px auto 20px auto;
+  padding: 0 8px;
 }
 
 .life-theme-faq h4 {
