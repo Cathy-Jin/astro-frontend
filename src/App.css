@@ -124,7 +124,7 @@ b {
 
 hr {
   border: none;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--beige);
   margin: 15px 0;
 }
 
@@ -383,7 +383,7 @@ button:hover {
   text-align: left;
   padding: 5px;
   max-width: min(80vw, 600px);
-  min-width: 60vw;
+  /* min-width: 60vw; */
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
@@ -625,7 +625,7 @@ button:hover {
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   background-color: var(--teal-blue-10);
   margin: 10px auto 20px auto;
-  padding: 0 8px;
+  padding: 10px;
 }
 
 .life-theme-faq h4 {

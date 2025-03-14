@@ -212,11 +212,14 @@ function LifeThemeItemReading({ life_theme }) {
               </p>
               <br />
               <h3>星盘中表现形式</h3>
-                {life_theme.reading.details?.map((detail) => (
-                    <p>
-                      <b>{detail.pattern}：</b> {detail.interpretation}
-                    </p>
-                ))}
+                {life_theme.reading.details?.map((detail) => {
+                  if (detail.pattern && detail.interpretation) {
+                    return (
+                      <p>
+                        <b>{detail.pattern}：</b> {detail.interpretation}
+                      </p>
+                  );}
+                })}
             </>
           )}
         </div>
