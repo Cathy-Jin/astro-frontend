@@ -175,7 +175,7 @@ const ProfileOverview = () => {
             </div>
           ))}
           {profiles && (<div className="user-profile-item-dash">
-            <h2 >
+            <h2>
               <Link to="/create-profile" className="no-underline">+ 创建档案</Link>
             </h2>
           </div>)}

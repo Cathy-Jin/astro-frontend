@@ -112,7 +112,7 @@ const Home = () => {
       <div className="main-content">
         <h1>人生主题计算器</h1>
         <div className="background">
-          <h4 onClick={toggleExpand} style={{ cursor: "pointer" }}>
+          <h4 onClick={toggleExpand} style={{ cursor: "pointer", textDecoration: "underline" }}>
             常见问题及解答
           </h4>
           {isExpanded && (

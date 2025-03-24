@@ -13,21 +13,33 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import Feedback from "./components/Feedback";
 import NatalChat from "./components/content/NatalChart";
+import AstroDice from "./components/content/AstroDice";
+import Notebook from "./components/notebook/Notebook";
+import Note from "./components/notebook/Note";
 
 const App = () => {
   return (
     <div className="App">
       <Router>
         <Routes>
+          {/* Homepage */}
           <Route path="/" element={<Home />} />
+          {/* AuthN/Z */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          {/* Profile */}
           <Route path="/profile" element={<ProfileOverview />} />
           <Route path="/create-profile" element={<CreateProfile />} />
-          <Route path="/life-theme" element={<LifeThemeReading />} />
           <Route path="/profile-detail" element={<NatalChat />} />
+          {/* Notebook */}
+          <Route path="/notebook" element={<Notebook />} />
+          <Route path="/note" element={<Note />} />
+          {/* Feature */}
+          <Route path="/astro-dice" element={<AstroDice />} />
+          <Route path="/life-theme" element={<LifeThemeReading />} />
+          {/* Others */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/feedback" element={<Feedback />} />

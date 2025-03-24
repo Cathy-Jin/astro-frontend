@@ -60,11 +60,11 @@ const NatalChart = () => {
         if (response.status === 200) {
           const data = await response.json();
           setResult(data);
-        } else if (response.status === 403 || response.status === 401) {
+        } else if (response.status === 403 || response.status === 401 || response.status === 422) {
           localStorage.clear();
           setError(
             <div className="error">
-              未登录，请重新<Link to="/signin">登录</Link>或
+              请重新<Link to="/signin">登录</Link>或
               <Link to="/signup">注册</Link>。
             </div>
           );
