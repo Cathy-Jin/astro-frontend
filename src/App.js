@@ -16,6 +16,7 @@ import NatalChat from "./components/content/NatalChart";
 import AstroDice from "./components/content/AstroDice";
 import Notebook from "./components/notebook/Notebook";
 import Note from "./components/notebook/Note";
+import Dashboard from "./components/Dashboard";
 
 const App = () => {
   return (
@@ -29,6 +30,8 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          {/* User Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* Profile */}
           <Route path="/profile" element={<ProfileOverview />} />
           <Route path="/create-profile" element={<CreateProfile />} />

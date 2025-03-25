@@ -135,7 +135,6 @@ const Notebook = () => {
         <div className="result">
           {notes?.map((note) => (
             <div className="notebook-item" key={note.id}>
-              
               <h4>
                 {note.question.slice(0, 35)}
                 {note.question.length > 35 ? <>……</> : <></>}

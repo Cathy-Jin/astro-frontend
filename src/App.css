@@ -29,6 +29,8 @@
   --hunter-green-70: rgb(50, 85, 60, 0.7);
 
   --shadow-gray-50: rgb(74, 74, 74, 0.5);
+
+  color-scheme: light;
 }
 
 @font-face {
@@ -36,6 +38,7 @@
   src: url("fonts/ChillJinshuSongRegular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -43,6 +46,7 @@
   src: url("fonts/SourceHanSansSC-VF.otf.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* ========== GLOBAL STYLES ========== */
@@ -233,7 +237,8 @@ label {
   width: min(80vw, 560px);
   min-height: 70px;
   height: auto;
-  border-radius: 8px;
+  resize: none;
+  overflow-y: hidden;
   /* border: 1px solid #999; */
   box-shadow: none;
   border: none;
@@ -328,10 +333,20 @@ button:hover {
   margin: 10px;
 }
 
-.deletion-button, .next-button, .back-button, .image-button {
+.deletion-button, .back-button, .image-button {
   background-color: transparent;
   margin: 10px 0px 0px 0px;
   padding: 0px 8px;
+}
+
+.next-button {
+  background-color: transparent;
+  margin: 30px 0px 0px 30px;
+  padding: 0px 8px;
+}
+
+.image-button, .deletion-button {
+  margin: 0px 0px 0px 40px;
 }
 
 .deletion-button:hover, .next-button:hover, .back-button:hover, .image-button:hover {
@@ -341,6 +356,32 @@ button:hover {
 .deletion-button-image, .next-button-image, .back-button-image, .button-image {
   width: 16px;
   height: auto;
+}
+
+.dashboard-feature-button {
+  background-color: transparent;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 0px;
+}
+
+.dashboard-feature-button:hover {
+  background-color: var(--maximum-purple-20);
+}
+
+.dashboard-feature-button-image {
+  width: 36px;
+  height: auto;
+}
+
+.button-text {
+  font-family: "SourceHanSansSC", "Microsoft YaHei", sans-serif;
+  margin-top: 8px;
+  margin-bottom: 0px;
 }
 
 .general-reading-button-container {
@@ -419,6 +460,7 @@ button:hover {
 .main-content {
   margin-top: 60px;
   padding-top: 20px;
+  min-height: 75svh;
 }
 
 /* FAQ Background */
@@ -591,25 +633,11 @@ button:hover {
   margin: 0;
 }
 
-.notebook-item h5 {
-  text-align: left;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  width: 100%;
-  flex-wrap: wrap;
-  font-size: 14px;
-  color: var(--shadow-gray);
-  font-weight: normal;
-  font-family: "Microsoft YaHei", "SourceHanSansSC", sans-serif;
-}
-
 .notebook-item h4 {
   text-align: left;
   color: var(--shadow-gray);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.5;
   margin: 5px 0 10px 0;
   display: inherit;
@@ -754,6 +782,42 @@ button:hover {
 
 .life_theme_item_detail ul {
   text-align: left;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: min(85vw, 600px);
+  border-radius: 8px;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  background-color: transparent;
+  margin: 10px 0 20px 0;
+  padding: 10px;
+  text-align: left;
+}
+
+
+.dashboard-header h2 {
+  text-align: left;
+  width: 100%;
+  flex-wrap: wrap;
+  color: var(--maximum-purple)
+}
+
+
+.dashboard-feature-horizontal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: min(80vw, 600px);
+  padding: 20px min(5vw, 50px);
+  background-color: var(--maximum-purple-10);
+  border-radius: 8px;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  margin: 0 0 20px 0;
 }
 
 /* Tables */

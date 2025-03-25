@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   useLocation,
   useSearchParams,
@@ -25,11 +25,14 @@ const Note = () => {
   const note_id = searchParams.get("id") || "";
   const location = useLocation();
   const note = location.state?.note; // Get from router state
+  const textareaRef = useRef(null);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setNewComment(e.target.value);
+    textareaRef.current.style.height = "auto"; // Reset height
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height based on content
   };
 
   // Handle note deletion
@@ -235,7 +238,13 @@ const Note = () => {
             >
               我的笔记
             </Link>{" "}
-            / 占星骰子
+            /{" "}
+            <Link
+              to="/astro-dice"
+              style={{ textDecoration: "none", color: "var(--shadow-gray)" }}
+            >
+              占星骰子
+            </Link>
           </p>
           <h2>{note?.question}</h2>
           <p style={{ color: "var(--shadow-gray-50)" }}>
@@ -250,10 +259,11 @@ const Note = () => {
         <br />
         <div className="note-input-collector">
           <textarea
+            ref={textareaRef}
             className="general-reading-input"
             type="text"
             name="comment"
-            maxLength="1000"
+            maxLength="5000"
             placeholder="输入你此时的想法。"
             value={newComment}
             onChange={handleChange}
@@ -276,22 +286,22 @@ const Note = () => {
               <div className="note-comment">
                 <hr />
                 <div className="note-comment-header">
-                <p style={{ color: "var(--shadow-gray-50)" }}>
-                  {formatLocalTimeWithDayjs(comment?.last_modified_at)}
-                  &nbsp;&nbsp;&nbsp;&nbsp;我
-                </p>
-                {deleteCommentErrors[comment?.id]}
-                <button
-                  className="deletion-button"
-                  onClick={() => deleteComment(comment?.id)}
-                  disabled={isDeleteCommentDisabled[comment.id]}
-                >
-                  <img
-                    src="icon/trash.png"
-                    alt="删除"
-                    className="deletion-button-image"
-                  />
-                </button>
+                  <p style={{ color: "var(--shadow-gray-50)" }}>
+                    {formatLocalTimeWithDayjs(comment?.last_modified_at)}
+                    &nbsp;&nbsp;&nbsp;&nbsp;我
+                  </p>
+                  {deleteCommentErrors[comment?.id]}
+                  <button
+                    className="deletion-button"
+                    onClick={() => deleteComment(comment?.id)}
+                    disabled={isDeleteCommentDisabled[comment.id]}
+                  >
+                    <img
+                      src="icon/trash.png"
+                      alt="删除"
+                      className="deletion-button-image"
+                    />
+                  </button>
                 </div>
                 <p>{comment?.comment}</p>
               </div>
@@ -305,15 +315,12 @@ const Note = () => {
               &nbsp;&nbsp;&nbsp;&nbsp;星迹档案（解读仅供参考）
             </p>
             <p>{note?.output}</p>
-
           </div>
         )}
         {loading && <p>正在加载复盘历史……</p>}
         {error}
         <div className="note-bottom-button-container">
-          <button onClick={() => navigate("/notebook")}>
-            返回
-          </button>{" "}
+          <button onClick={() => navigate("/notebook")}>返回</button>{" "}
           <button
             onClick={() => deleteNote(note.id)}
             disabled={isDeleteNoteDisabled}

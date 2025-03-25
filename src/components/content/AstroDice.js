@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
@@ -13,6 +13,7 @@ const AstroDice = () => {
   const [error, setError] = useState("");
   const [question, setQuestion] = useState("");
   const [rolls, setRolls] = useState([]);
+  const textareaRef = useRef(null);
 
   const navigate = useNavigate();
   const toggleFaqExpand = () => {
@@ -24,6 +25,8 @@ const AstroDice = () => {
 
   const handleChange = (e) => {
     setQuestion(e.target.value);
+    textareaRef.current.style.height = "auto"; // Reset height
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height based on content
   };
 
   const userId = localStorage.getItem("user_id");
@@ -57,6 +60,11 @@ const AstroDice = () => {
       setNoteError("");
       setResult(null);
       setError("");
+
+      if (!question) {
+        setNoteError(<div className="error">请输入问题。</div>);
+        return;
+      }
       const response = await fetch(
         "https://astro-notebook.onrender.com/astro-dice",
         {
@@ -150,23 +158,59 @@ const AstroDice = () => {
           >
             什么是占星骰子？
           </h4>
-          {isFaqExpanded && <p>placeholder TODO</p>}
+          {isFaqExpanded && (
+            <>
+              <p>
+                <b>什么是占星骰子？</b>
+                <br />
+                占星骰子是一种简单快捷的占卜工具，通过一次投掷三个骰子（分别代表星体、星座、宫位）获得组合，从中解读启示。它不同于传统命理预测，更像一种<b>启发式工具</b>，帮助提问者从新角度思考问题。
+              </p>
+              <p>
+                <b>如何向骰子提问？</b>
+                <br />
+                1. 问题需具体明确。
+                <br />
+                避免模糊运势类提问：如“下个月财运如何？”应改为事件导向问题，例如“做某项目对我的影响如何？”。
+                <br />
+                拆分选择类问题：可分别投掷“选择A的结果”与“选择B的结果”对比利弊（如“如果我买包，会有什么影响”
+                vs “如果不买包，会有什么影响”）。
+                <br />
+                2. 一事一卜，忌重复提问。
+                <br />
+                同一事件不同角度提问会降低结果准确性，且反映了提问者的焦虑心态。建议首次解读后先行动起来。
+                <br />
+                3. 多提开放性问题。
+                <br />
+                骰子擅长揭示当前状态与潜在问题，而非最终结果。
+                <br />
+                4. 限定合理时间范围。
+                <br />
+                骰子适用于短期，长期问题（如“三年后事业”）需结合本命盘分析。
+              </p>
+              <p>
+                <b>不义不占、不疑不占、不诚不占。</b>
+              </p>
+            </>
+          )}
         </div>
         <div className="note-input-collector">
           <textarea
+            ref={textareaRef}
             className="general-reading-input"
             type="text"
             name="question"
-            maxLength="200"
-            placeholder="请输入一个与自己相关的开放式问题，并简要说明背景，200字以内。若涉及未来时间，建议限定在1个月内。"
+            maxLength="500"
+            placeholder="请输入一个与自己相关的开放式问题，并简要说明背景。若涉及未来时间，建议限定在1个月内。"
             value={question}
             onChange={handleChange}
             required
           />
           <div className="general-reading-button-container">
-            <button onClick={() => rollDice(1)}>掷一次</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button onClick={() => rollDice(3)}>掷三次</button>
+            <p>
+              <button onClick={() => rollDice(1)}>掷一次</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span>或</span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button onClick={() => rollDice(3)}>掷三次</button>
+            </p>
           </div>
         </div>
 
@@ -186,22 +230,35 @@ const AstroDice = () => {
                 >
                   怎么解读结果？
                 </p>
-                {isInstructionExpanded && <p>placeholder TODO</p>}
+                {isInstructionExpanded && (<>
+                  <p>
+                    “星体”代表“对象”—— What
+                    <br />
+                    “星座”代表“形式”—— How
+                    <br />
+                    “宫位”代表“地点/领域”—— Where
+                    <br />
+                  </p>
+                  <p>每位用户每天可以使用2次免费解读。解读生成后会自动保存到“我的笔记”。用户也可以选择直接将骰子结果保存至笔记，以便日后复盘。</p></>
+                )}
                 {displayAstroDiceRolls(rolls)}
                 <div className="general-reading-button-container">
-                  <button
-                    className="general-reading-button"
-                    onClick={() => fetchAndSave(false)}
-                  >
-                    保存至笔记
-                  </button>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button
-                    className="general-reading-button"
-                    onClick={() => fetchAndSave(true)}
-                  >
-                    解读并保存
-                  </button>
+                  <p>
+                    <button
+                      className="general-reading-button"
+                      onClick={() => fetchAndSave(false)}
+                    >
+                      保存至笔记
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span>或</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                      className="general-reading-button"
+                      onClick={() => fetchAndSave(true)}
+                    >
+                      解读并保存
+                    </button>
+                  </p>
                 </div>
                 <br />
                 <div style={{ textAlign: "center" }}>

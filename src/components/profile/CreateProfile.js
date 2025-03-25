@@ -117,6 +117,7 @@ const CreateProfile = () => {
                 className="profile-input"
                 type="text"
                 name="name"
+                maxLength="12"
                 placeholder="未命名档案"
                 value={formData.name}
                 onChange={handleChange}

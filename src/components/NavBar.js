@@ -32,9 +32,9 @@ const NavBar = () => {
           <div className="navbar-links">
             <button
               className="navbar-button-profile"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/dashboard")}
             >
-              我的档案
+              我的
             </button>
             <button className="navbar-button" onClick={handleLogout}>
               登出

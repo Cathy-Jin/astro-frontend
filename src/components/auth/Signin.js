@@ -36,7 +36,7 @@ const Signin = () => {
         localStorage.setItem("email", data.email);
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("access_token", data.access_token);
-        navigate("/profile");
+        navigate("/dashboard");
       } else {
         setError(
           <div className="error">
