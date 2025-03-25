@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
-import { formatLocalTimeWithDayjs} from "../Util";
+import { formatLocalTimeWithDayjs } from "../Util";
 
 const Notebook = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [notes, setNotes] = useState(null);
   const [start, setStart] = useState(0);
-  const [isDeleteDisabled, setIsDeleteDisabled] = useState([]);
   const [generalError, setGeneralError] = useState("");
   const [errors, setErrors] = useState({}); // To track errors for each profile
   const [loadingMore, setLoadingMore] = useState(false);
@@ -18,26 +17,33 @@ const Notebook = () => {
   const navigate = useNavigate();
 
   // Handle load more notes
-  const loadMoreNotes = async() => {
+  const loadMoreNotes = async () => {
     setLoadingMore(true);
     setLoadingMoreError("");
     try {
       const response = await fetch(
-        "https://astro-notebook.onrender.com/astro-dice?start=" + start + "&count=20&user_id=" + localStorage.getItem("user_id"),
+        "https://astro-notebook.onrender.com/astro-dice?start=" +
+          start +
+          "&count=20&user_id=" +
+          localStorage.getItem("user_id"),
         {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
-            contentType: "application/json;charset=UTF-8"
+            contentType: "application/json;charset=UTF-8",
           },
           credentials: "include", // Include cookies in the request
         }
       );
       if (response.status === 200) {
         const data = await response.json();
-        setNotes([...notes, ...data?.history])
+        setNotes([...notes, ...data?.history]);
         setStart(data?.next_start);
-      } else if (response.status === 403 || response.status === 401 || response.status === 422) {
+      } else if (
+        response.status === 403 ||
+        response.status === 401 ||
+        response.status === 422
+      ) {
         localStorage.clear();
         setUser(null);
         setNotes(null);
@@ -54,18 +60,18 @@ const Notebook = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchNotes = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://astro-notebook.onrender.com/astro-dice?start=0&count=20&user_id=" + localStorage.getItem("user_id"),
+          "https://astro-notebook.onrender.com/astro-dice?start=0&count=20&user_id=" +
+            localStorage.getItem("user_id"),
           {
             method: "GET",
             headers: {
               Authorization: "Bearer " + localStorage.getItem("access_token"),
-              contentType: "application/json;charset=UTF-8"
+              contentType: "application/json;charset=UTF-8",
             },
             credentials: "include", // Include cookies in the request
           }
@@ -74,8 +80,12 @@ const Notebook = () => {
           const data = await response.json();
           setUser({ email: localStorage.getItem("email") });
           setNotes(data?.history);
-          setStart(data?.next_start)
-        } else if (response.status === 403 || response.status === 401 || response.status === 422) {
+          setStart(data?.next_start);
+        } else if (
+          response.status === 403 ||
+          response.status === 401 ||
+          response.status === 422
+        ) {
           localStorage.clear();
           setUser(null);
           setNotes(null);
@@ -126,7 +136,15 @@ const Notebook = () => {
       <NavBar />
       <div className="main-content">
         <h1>我的笔记</h1>
-        <p>占星骰子的笔记都会存在这里</p>
+        <p>
+          <Link
+            to="/astro-dice"
+            style={{ textDecoration: "none", color: "var(--shadow-gray)" }}
+          >
+            占星骰子
+          </Link>
+          的笔记都会存在这里
+        </p>
         {loading && (
           <div>
             <p>正在获取笔记，请稍后。。。</p>
@@ -142,15 +160,17 @@ const Notebook = () => {
               </h4>
               <div className="notebook-details-container">
                 <div className="notebook-details">
-                  <p style={{color: "var(--hunter-green-50)"}}>占星骰子</p>
+                  <p style={{ color: "var(--hunter-green-50)" }}>占星骰子</p>
                   <p>{formatLocalTimeWithDayjs(note.created_at)}</p>
                 </div>
 
                 <button
                   className="next-button"
-                  onClick={() => navigate("/note?id=" + note.id, {
-                    state: { note: note },
-                  })}
+                  onClick={() =>
+                    navigate("/note?id=" + note.id, {
+                      state: { note: note },
+                    })
+                  }
                 >
                   <img
                     src="icon/next.png"
@@ -163,7 +183,7 @@ const Notebook = () => {
             </div>
           ))}
         </div>
-        {(start > 0 && start % 20 === 0) && (
+        {start > 0 && start % 20 === 0 && (
           <>
             <button className="profile-button" onClick={() => loadMoreNotes()}>
               查看更多笔记
@@ -180,7 +200,6 @@ const Notebook = () => {
       <Footer />
     </div>
   );
-}
-
+};
 
 export default Notebook;
