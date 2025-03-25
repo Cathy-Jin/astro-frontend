@@ -126,6 +126,7 @@ const Notebook = () => {
       <NavBar />
       <div className="main-content">
         <h1>我的笔记</h1>
+        <p>占星骰子的笔记都会存在这里</p>
         {loading && (
           <div>
             <p>正在获取笔记，请稍后。。。</p>
@@ -162,7 +163,7 @@ const Notebook = () => {
             </div>
           ))}
         </div>
-        {start % 20 === 0 && (
+        {(start > 0 && start % 20 === 0) && (
           <>
             <button className="profile-button" onClick={() => loadMoreNotes()}>
               查看更多笔记
