@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { getSeededRNG, displayAstroDiceRolls } from "../Util";
@@ -15,7 +15,6 @@ const AstroDice = () => {
   const [rolls, setRolls] = useState([]);
   const textareaRef = useRef(null);
 
-  const navigate = useNavigate();
   const toggleFaqExpand = () => {
     setIsFaqExpanded((prevState) => !prevState);
   };
@@ -41,6 +40,17 @@ const AstroDice = () => {
       setError(<div className="error">请输入问题。</div>);
       return;
     }
+
+    if (!userId) {
+      setError(
+        <div className="error">
+          未登录，请先<Link to="/signin">登录</Link>或
+          <Link to="/signup">注册</Link>。
+        </div>
+      );
+      return;
+    }
+
     let rolls = [];
     let timestamp = Date.now();
 
@@ -128,23 +138,28 @@ const AstroDice = () => {
     }
   };
 
-  if (!userId) {
-    return (
-      <div className="astro-dice">
-        <NavBar />
-        <div className="main-content">
-          <p>
-            未登录，请先<Link to="/signin">登录</Link>或
-            <Link to="/signup">注册</Link>。
-          </p>
-          <button className="profile-button" onClick={() => navigate("/")}>
-            返回首页
-          </button>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  // Improve SEO
+  useEffect(() => {
+    // Store default values
+    const defaultTitle = document.title;
+    const defaultMetaDesc = document.querySelector('meta[name="description"]')?.content;
+    const defaultCanonical = document.querySelector('link[rel="canonical"]')?.href;
+
+    // override
+    document.title = "占星骰子";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "多种投掷方式 · 免费解读 · 复盘笔记 | 看见每一个问题");
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) canonicalLink.href = "https://astro-archive.com/astro-dice";
+
+    // Cleanup: Revert to defaults on unmount
+    return () => {
+      document.title = defaultTitle;
+      if (metaDesc) metaDesc.setAttribute("content", defaultMetaDesc || "");
+      if (canonicalLink) canonicalLink.href = defaultCanonical || "https://astro-archive.com/";
+    };
+  }, []);
+
 
   return (
     <div className="astro-dice">
