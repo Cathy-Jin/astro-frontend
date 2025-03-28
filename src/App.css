@@ -403,28 +403,39 @@ button:hover {
 /* ========== NAVIGATION ========== */
 .navbar-default {
   background-color: #fff;
-  border-bottom: 1px solid #e7e7e7;
-  position: fixed;
-  top: 0;
+  border-bottom: 1px solid var(--logo-color);
+  /* position: fixed;
+  top: 0; */
   left: 0;
   right: 0;
+  margin-left:auto;
+  margin-right:auto;
   height: 50px;
+  /* width: min(90vw, 1250px); */
   display: flex;
   justify-content: space-between;
   align-items: last baseline;
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px 3vw;
+
+
+  /* Positioning */
+  position: fixed;
+  top: 0;
+  /* left: 50%;
+  transform: translateX(-50%); */
+  
+  /* Ensure it's above other content */
+  z-index: 1000;
 }
 
 .navbar-left {
   margin-right: auto;
 }
 
-.navbar-title {
+.navbar-img {
   margin: 0;
-  font-family: "ChillJinshuSongRegular", "SourceHanSansSC", "Microsoft YaHei",
-    sans-serif;
-  color: var(--logo-color);
+  width: 250px;
+  height: auto;
 }
 
 .navbar-text {
@@ -444,8 +455,8 @@ button:hover {
     padding: 10px 15px;
   }
 
-  .navbar-title {
-    font-size: 1.5rem;
+  .navbar-img {
+    width: 10rem;
   }
 
   .navbar-button,
@@ -739,8 +750,7 @@ button:hover {
 }
 
 .natal-chart-item-container {
-  max-width: min(90vw, 1200px);
-  min-width: 60vw;
+  width: min(90vw, 1200px);
   display: flex;
   flex-direction: row;
   overflow: hidden;

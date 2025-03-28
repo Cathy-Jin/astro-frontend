@@ -25,7 +25,13 @@ const NavBar = () => {
   return (
     <nav className="navbar-default">
       <div className="navbar-left">
-      <Link to="/" className="no-underline"><h1 className="navbar-title">星迹档案</h1></Link>
+        <Link to="/" className="no-underline">
+          <img
+            src="logo_en.png"
+            alt="Astro Archive"
+            className="navbar-img"
+          />
+        </Link>
       </div>
       <div className="navbar-right">
         {user ? (
